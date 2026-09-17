@@ -63,19 +63,27 @@
     let poeng = 0;
     let sporsmalNummer = 1;
 
-    function svar(valg) {
-        const resultat = document.getElementById("resultat");
+   function svar(valg) {
+    const resultat = document.getElementById("resultat");
 
-        if (valg === "Oslo") {
-            poeng++;
-            document.getElementById("poeng").textContent = poeng;
-            resultat.textContent = "✅ Riktig svar!";
-        } else {
-            resultat.textContent = "❌ Feil svar!";
-        }
+    let riktigSvar;
 
-        document.getElementById("neste").style.display = "inline-block";
+    if (sporsmalNummer === 1) {
+        riktigSvar = "Oslo";
+    } else if (sporsmalNummer === 2) {
+        riktigSvar = "Merkur";
     }
+
+    if (valg === riktigSvar) {
+        poeng++;
+        document.getElementById("poeng").textContent = poeng;
+        resultat.textContent = "✅ Riktig svar!";
+    } else {
+        resultat.textContent = "❌ Feil svar!";
+    }
+
+    document.getElementById("neste").style.display = "inline-block";
+}
 
     function nesteSporsmal() {
 
