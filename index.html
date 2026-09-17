@@ -44,17 +44,24 @@
     <h2>Ukens konkurranse</h2>
 <p>Poeng: <span id="poeng">0</span></p>
        
-    <p id="sporsmal">Hva er hovedstaden i Norge?</p>
+   <p id="sporsmal">Hva er hovedstaden i Norge?</p>
 
+<div id="svaralternativer">
     <button onclick="svar('Oslo')">Oslo</button>
     <button onclick="svar('Bergen')">Bergen</button>
     <button onclick="svar('Trondheim')">Trondheim</button>
+</div>
 
-    <p id="resultat"></p>
+<p id="resultat"></p>
+
+<button id="neste" onclick="nesteSporsmal()" style="display:none;">
+    Neste spørsmål
+</button>
 </div>
     
 <script>
     let poeng = 0;
+    let sporsmalNummer = 1;
 
     function svar(valg) {
         const resultat = document.getElementById("resultat");
@@ -65,6 +72,28 @@
             resultat.textContent = "✅ Riktig svar!";
         } else {
             resultat.textContent = "❌ Feil svar!";
+        }
+
+        document.getElementById("neste").style.display = "inline-block";
+    }
+
+    function nesteSporsmal() {
+
+        if (sporsmalNummer === 1) {
+
+            sporsmalNummer = 2;
+
+            document.getElementById("sporsmal").textContent =
+                "Hvilken planet er nærmest solen?";
+
+            document.getElementById("svaralternativer").innerHTML = `
+                <button onclick="svar('Jorden')">Jorden</button>
+                <button onclick="svar('Merkur')">Merkur</button>
+                <button onclick="svar('Mars')">Mars</button>
+            `;
+
+            document.getElementById("resultat").textContent = "";
+            document.getElementById("neste").style.display = "none";
         }
     }
 </script>
