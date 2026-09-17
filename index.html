@@ -42,7 +42,8 @@
 
    <div class="konkurranse" id="quiz">
     <h2>Ukens konkurranse</h2>
-
+<p>Poeng: <span id="poeng">0</span></p>
+       
     <p id="sporsmal">Hva er hovedstaden i Norge?</p>
 
     <button onclick="svar('Oslo')">Oslo</button>
@@ -53,13 +54,17 @@
 </div>
     
 <script>
+    let poeng = 0;
+
     function svar(valg) {
         const resultat = document.getElementById("resultat");
 
         if (valg === "Oslo") {
+            poeng++;
+            document.getElementById("poeng").textContent = poeng;
             resultat.textContent = "✅ Riktig svar!";
         } else {
-            resultat.textContent = "❌ Feil svar. Prøv igjen!";
+            resultat.textContent = "❌ Feil svar!";
         }
     }
 </script>
