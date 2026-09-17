@@ -98,7 +98,7 @@
 
         #resultatliste {
             margin-top: 30px;
-            text-align: left;
+            text-align: center;
         }
 
         #resultatliste h3 {
@@ -106,13 +106,14 @@
         }
 
         .resultatrad {
-            padding: 10px 5px;
-            border-bottom: 1px solid #eee;
+            text-align: center;
+            margin-bottom: 22px;
         }
 
         .resultatdato {
             font-size: 14px;
             color: #777;
+            margin-top: 4px;
         }
 
         #toppFem {
@@ -580,10 +581,10 @@
                     rad.innerHTML =
                         "<strong>" +
                         resultat.navn +
-                        "</strong> – " +
-                        resultat.poeng +
-                        " poeng" +
+                        "</strong>" +
                         '<div class="resultatdato">' +
+                        resultat.poeng +
+                        "p, " +
                         datoFormatert +
                         "</div>";
 
