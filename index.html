@@ -243,14 +243,24 @@
             } else {
 
                 document.getElementById("sporsmal").textContent =
-                    "Konkurransen er ferdig!";
+                    "🎉 Konkurransen er ferdig!";
 
                 document.getElementById("svaralternativer").innerHTML = "";
 
                 document.getElementById("resultat").textContent =
-                    navn + ", du fikk " + poeng + " poeng!";
+                    navn + ", du fikk " + poeng + " av " + sporsmal.length + " poeng!";
 
                 document.getElementById("neste").style.display = "none";
+
+                let spillIgjen = document.createElement("button");
+
+                spillIgjen.textContent = "🔄 Spill igjen";
+
+                spillIgjen.onclick = function() {
+                    location.reload();
+                };
+
+                document.getElementById("svaralternativer").appendChild(spillIgjen);
             }
         }
 
