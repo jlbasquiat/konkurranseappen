@@ -98,6 +98,35 @@
 
         #resultatliste {
             margin-top: 30px;
+            text-align: left;
+        }
+
+        #resultatliste h3 {
+            text-align: center;
+        }
+
+        .resultatrad {
+            padding: 10px 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .resultatdato {
+            font-size: 14px;
+            color: #777;
+        }
+
+        #toppFem {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        #toppFem h3 {
+            text-align: center;
+        }
+
+        .topprad {
+            padding: 8px 5px;
+            border-bottom: 1px solid #eee;
         }
 
         @media (max-width: 600px) {
@@ -141,6 +170,7 @@
 
     <h1>🏆 Konkurransen</h1>
 
+
     <div id="startside" class="konkurranse">
 
         <h2>Velkommen!</h2>
@@ -158,6 +188,15 @@
         <button onclick="startKonkurranse()">
             Start
         </button>
+
+
+        <div id="toppFem">
+
+            <h3>🏆 Topp 5</h3>
+
+            <p>Laster resultater...</p>
+
+        </div>
 
     </div>
 
@@ -204,6 +243,7 @@
         const supabaseKey =
             "sb_publishable_ulauPK9fAZF8ndLKUlACxg_uvNnGtiU";
 
+
         const supabaseClient =
             supabase.createClient(
                 supabaseUrl,
@@ -212,111 +252,165 @@
 
 
         let sporsmal = [
+
             {
                 tekst: "Hva er hovedstaden i Norge?",
                 svar: ["Oslo", "Bergen", "Trondheim"],
                 riktig: "Oslo"
             },
+
             {
                 tekst: "Hvilken planet er nærmest solen?",
                 svar: ["Jorden", "Merkur", "Mars"],
                 riktig: "Merkur"
             },
+
             {
                 tekst: "Hvor mange dager er det i en uke?",
                 svar: ["5", "7", "10"],
                 riktig: "7"
             },
+
             {
                 tekst: "Hvilket dyr er kjent som menneskets beste venn?",
                 svar: ["Katt", "Hund", "Hest"],
                 riktig: "Hund"
             },
+
             {
                 tekst: "Hva heter Norges lengste elv?",
                 svar: ["Glomma", "Drammenselva", "Lågen"],
                 riktig: "Glomma"
             }
+
         ];
 
 
         function startKonkurranse() {
 
-            navn = document.getElementById("navn").value;
+            navn =
+                document.getElementById("navn").value.trim();
+
 
             if (navn === "") {
+
                 alert("Skriv inn navnet ditt først!");
+
                 return;
             }
 
-            document.getElementById("spiller").textContent = navn;
 
-            document.getElementById("startside").style.display = "none";
+            document.getElementById("spiller").textContent =
+                navn;
 
-            document.getElementById("quiz").style.display = "block";
+
+            document.getElementById("startside").style.display =
+                "none";
+
+
+            document.getElementById("quiz").style.display =
+                "block";
+
 
             visSporsmal();
+
         }
 
 
         function blandSvar(svar) {
-            return svar.sort(() => Math.random() - 0.5);
+
+            return svar.sort(
+                () => Math.random() - 0.5
+            );
+
         }
 
 
         function visSporsmal() {
 
-            let aktueltSporsmal = sporsmal[sporsmalNummer];
+            let aktueltSporsmal =
+                sporsmal[sporsmalNummer];
+
 
             document.getElementById("sporsmalTeller").textContent =
-                "Spørsmål " + (sporsmalNummer + 1) + " av " + sporsmal.length;
+                "Spørsmål " +
+                (sporsmalNummer + 1) +
+                " av " +
+                sporsmal.length;
+
 
             document.getElementById("sporsmal").textContent =
                 aktueltSporsmal.tekst;
 
+
             let svaralternativer =
                 document.getElementById("svaralternativer");
 
+
             svaralternativer.innerHTML = "";
 
-            blandSvar(aktueltSporsmal.svar).forEach(function(alternativ) {
 
-                let knapp = document.createElement("button");
+            blandSvar(aktueltSporsmal.svar).forEach(
+                function(alternativ) {
 
-                knapp.textContent = alternativ;
+                    let knapp =
+                        document.createElement("button");
 
-                knapp.onclick = function() {
-                    svar(alternativ);
-                };
 
-                svaralternativer.appendChild(knapp);
+                    knapp.textContent =
+                        alternativ;
 
-            });
 
-            document.getElementById("resultat").textContent = "";
+                    knapp.onclick =
+                        function() {
 
-            document.getElementById("neste").style.display = "none";
+                            svar(alternativ);
+
+                        };
+
+
+                    svaralternativer.appendChild(knapp);
+
+                }
+            );
+
+
+            document.getElementById("resultat").textContent =
+                "";
+
+
+            document.getElementById("neste").style.display =
+                "none";
+
         }
 
 
         function svar(valg) {
 
-            let aktueltSporsmal = sporsmal[sporsmalNummer];
+            let aktueltSporsmal =
+                sporsmal[sporsmalNummer];
+
 
             let resultat =
                 document.getElementById("resultat");
+
 
             if (valg === aktueltSporsmal.riktig) {
 
                 poeng++;
 
-                document.getElementById("poeng").textContent = poeng;
 
-                resultat.textContent = "✅ Riktig svar!";
+                document.getElementById("poeng").textContent =
+                    poeng;
+
+
+                resultat.textContent =
+                    "✅ Riktig svar!";
 
             } else {
 
-                resultat.textContent = "❌ Feil svar!";
+                resultat.textContent =
+                    "❌ Feil svar!";
 
             }
 
@@ -326,19 +420,26 @@
                     "#svaralternativer button"
                 );
 
-            knapper.forEach(function(knapp) {
-                knapp.disabled = true;
-            });
+
+            knapper.forEach(
+                function(knapp) {
+
+                    knapp.disabled = true;
+
+                }
+            );
 
 
             document.getElementById("neste").style.display =
                 "inline-block";
+
         }
 
 
         async function nesteSporsmal() {
 
             sporsmalNummer++;
+
 
             if (sporsmalNummer < sporsmal.length) {
 
@@ -349,25 +450,40 @@
                 document.getElementById("sporsmal").textContent =
                     "🎉 Konkurransen er ferdig!";
 
-                document.getElementById("svaralternativer").innerHTML = "";
+
+                document.getElementById("svaralternativer").innerHTML =
+                    "";
+
 
                 document.getElementById("resultat").textContent =
-                    navn + ", du fikk " + poeng + " av " + sporsmal.length + " poeng!";
+                    navn +
+                    ", du fikk " +
+                    poeng +
+                    " av " +
+                    sporsmal.length +
+                    " poeng!";
 
-                document.getElementById("neste").style.display = "none";
+
+                document.getElementById("neste").style.display =
+                    "none";
 
 
-                let { error } = await supabaseClient
-                    .from("Resultater")
-                    .insert({
-                        navn: navn,
-                        poeng: poeng
-                    });
+                let { error } =
+                    await supabaseClient
+                        .from("Resultater")
+                        .insert({
+                            navn: navn,
+                            poeng: poeng
+                        });
 
 
                 if (error) {
 
-                    console.error("Feil ved lagring:", error);
+                    console.error(
+                        "Feil ved lagring:",
+                        error
+                    );
+
 
                     document.getElementById("resultat").textContent +=
                         " ⚠️ Resultatet kunne ikke lagres.";
@@ -382,17 +498,25 @@
                 let spillIgjen =
                     document.createElement("button");
 
+
                 spillIgjen.textContent =
                     "🔄 Spill igjen";
 
-                spillIgjen.onclick = function() {
-                    location.reload();
-                };
+
+                spillIgjen.onclick =
+                    function() {
+
+                        location.reload();
+
+                    };
+
 
                 document
                     .getElementById("svaralternativer")
                     .appendChild(spillIgjen);
+
             }
+
         }
 
 
@@ -401,12 +525,15 @@
             let { data, error } =
                 await supabaseClient
                     .from("Resultater")
-                    .select("navn, poeng")
-                    .order("poeng", { ascending: false });
+                    .select("navn, poeng, created_at")
+                    .order("poeng", {
+                        ascending: false
+                    });
 
 
             let resultatliste =
                 document.getElementById("resultatliste");
+
 
             resultatliste.innerHTML =
                 "<h3>🏆 Resultatliste</h3>";
@@ -417,31 +544,125 @@
                 resultatliste.innerHTML +=
                     "<p>Kunne ikke hente resultatlisten.</p>";
 
+
                 console.error(
                     "Feil ved henting av resultater:",
                     error
                 );
 
+
                 return;
+
             }
 
 
-            data.forEach(function(resultat) {
+            data.forEach(
+                function(resultat) {
 
-                let rad =
-                    document.createElement("p");
+                    let rad =
+                        document.createElement("div");
 
-                rad.textContent =
-                    resultat.navn +
-                    " – " +
-                    resultat.poeng +
-                    " poeng";
 
-                resultatliste.appendChild(rad);
+                    rad.className =
+                        "resultatrad";
 
-            });
+
+                    let dato =
+                        new Date(resultat.created_at);
+
+
+                    let datoFormatert =
+                        dato.toLocaleDateString(
+                            "no-NO"
+                        );
+
+
+                    rad.innerHTML =
+                        "<strong>" +
+                        resultat.navn +
+                        "</strong> – " +
+                        resultat.poeng +
+                        " poeng" +
+                        '<div class="resultatdato">' +
+                        datoFormatert +
+                        "</div>";
+
+
+                    resultatliste.appendChild(rad);
+
+                }
+            );
+
         }
 
+
+        async function visToppFem() {
+
+            let { data, error } =
+                await supabaseClient
+                    .from("Resultater")
+                    .select("navn, poeng")
+                    .order("poeng", {
+                        ascending: false
+                    })
+                    .limit(5);
+
+
+            let toppFem =
+                document.getElementById("toppFem");
+
+
+            if (error) {
+
+                toppFem.innerHTML =
+                    "<h3>🏆 Topp 5</h3>" +
+                    "<p>Kunne ikke hente resultater.</p>";
+
+
+                console.error(
+                    "Feil ved henting av topp 5:",
+                    error
+                );
+
+
+                return;
+
+            }
+
+
+            toppFem.innerHTML =
+                "<h3>🏆 Topp 5</h3>";
+
+
+            data.forEach(
+                function(resultat, index) {
+
+                    let rad =
+                        document.createElement("p");
+
+
+                    rad.className =
+                        "topprad";
+
+
+                    rad.textContent =
+                        (index + 1) +
+                        ". " +
+                        resultat.navn +
+                        " – " +
+                        resultat.poeng +
+                        " poeng";
+
+
+                    toppFem.appendChild(rad);
+
+                }
+            );
+
+        }
+
+
+        visToppFem();
 
     </script>
 
