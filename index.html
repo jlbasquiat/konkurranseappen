@@ -61,7 +61,20 @@
     
 <script>
     let poeng = 0;
-    let sporsmalNummer = 1;
+let sporsmalNummer = 0;
+
+let sporsmal = [
+    {
+        tekst: "Hva er hovedstaden i Norge?",
+        svar: ["Oslo", "Bergen", "Trondheim"],
+        riktig: "Oslo"
+    },
+    {
+        tekst: "Hvilken planet er nærmest solen?",
+        svar: ["Jorden", "Merkur", "Mars"],
+        riktig: "Merkur"
+    }
+];
 
   function svar(valg) {
     const resultat = document.getElementById("resultat");
