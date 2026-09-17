@@ -96,29 +96,47 @@
             min-height: 30px;
         }
 
+
+        /* RESULTATLISTE */
+
         #resultatliste {
             margin-top: 30px;
+            width: 100%;
             text-align: center;
         }
 
         #resultatliste h3 {
             text-align: center;
+            margin-bottom: 25px;
         }
 
         .resultatrad {
+            width: 100%;
             text-align: center;
-            margin-bottom: 22px;
+            margin: 0 auto 25px auto;
+        }
+
+        .resultatrad strong {
+            display: block;
+            width: 100%;
+            text-align: center;
         }
 
         .resultatdato {
+            display: block;
+            width: 100%;
+            text-align: center;
             font-size: 14px;
             color: #777;
             margin-top: 4px;
         }
 
+
+        /* TOPP 5 PÅ FORSIDEN */
+
         #toppFem {
             margin-top: 30px;
-            text-align: left;
+            text-align: center;
         }
 
         #toppFem h3 {
@@ -127,8 +145,11 @@
 
         .topprad {
             padding: 8px 5px;
-            border-bottom: 1px solid #eee;
+            text-align: center;
         }
+
+
+        /* MOBIL */
 
         @media (max-width: 600px) {
 
@@ -172,6 +193,8 @@
     <h1>🏆 Konkurransen</h1>
 
 
+    <!-- FORSIDE -->
+
     <div id="startside" class="konkurranse">
 
         <h2>Velkommen!</h2>
@@ -202,12 +225,22 @@
     </div>
 
 
-    <div id="quiz" class="konkurranse" style="display: none;">
+    <!-- QUIZ -->
 
-        <p>Spiller: <strong id="spiller"></strong></p>
+    <div
+        id="quiz"
+        class="konkurranse"
+        style="display: none;"
+    >
+
+        <p>
+            Spiller:
+            <strong id="spiller"></strong>
+        </p>
 
         <p id="poengVisning">
-            ⭐ Poeng: <span id="poeng">0</span>
+            ⭐ Poeng:
+            <span id="poeng">0</span>
         </p>
 
         <p id="sporsmal"></p>
@@ -238,12 +271,13 @@
         let navn = "";
 
 
+        /* SUPABASE */
+
         const supabaseUrl =
             "https://ukxevteqkihqfycqjrou.supabase.co";
 
         const supabaseKey =
             "sb_publishable_ulauPK9fAZF8ndLKUlACxg_uvNnGtiU";
-
 
         const supabaseClient =
             supabase.createClient(
@@ -252,71 +286,105 @@
             );
 
 
+        /* SPØRSMÅL */
+
         let sporsmal = [
 
             {
                 tekst: "Hva er hovedstaden i Norge?",
-                svar: ["Oslo", "Bergen", "Trondheim"],
+                svar: [
+                    "Oslo",
+                    "Bergen",
+                    "Trondheim"
+                ],
                 riktig: "Oslo"
             },
 
             {
                 tekst: "Hvilken planet er nærmest solen?",
-                svar: ["Jorden", "Merkur", "Mars"],
+                svar: [
+                    "Jorden",
+                    "Merkur",
+                    "Mars"
+                ],
                 riktig: "Merkur"
             },
 
             {
                 tekst: "Hvor mange dager er det i en uke?",
-                svar: ["5", "7", "10"],
+                svar: [
+                    "5",
+                    "7",
+                    "10"
+                ],
                 riktig: "7"
             },
 
             {
                 tekst: "Hvilket dyr er kjent som menneskets beste venn?",
-                svar: ["Katt", "Hund", "Hest"],
+                svar: [
+                    "Katt",
+                    "Hund",
+                    "Hest"
+                ],
                 riktig: "Hund"
             },
 
             {
                 tekst: "Hva heter Norges lengste elv?",
-                svar: ["Glomma", "Drammenselva", "Lågen"],
+                svar: [
+                    "Glomma",
+                    "Drammenselva",
+                    "Lågen"
+                ],
                 riktig: "Glomma"
             }
 
         ];
 
 
+        /* START KONKURRANSEN */
+
         function startKonkurranse() {
 
             navn =
-                document.getElementById("navn").value.trim();
+                document
+                    .getElementById("navn")
+                    .value
+                    .trim();
 
 
             if (navn === "") {
 
-                alert("Skriv inn navnet ditt først!");
+                alert(
+                    "Skriv inn navnet ditt først!"
+                );
 
                 return;
             }
 
 
-            document.getElementById("spiller").textContent =
-                navn;
+            document
+                .getElementById("spiller")
+                .textContent = navn;
 
 
-            document.getElementById("startside").style.display =
-                "none";
+            document
+                .getElementById("startside")
+                .style.display = "none";
 
 
-            document.getElementById("quiz").style.display =
-                "block";
+            document
+                .getElementById("quiz")
+                .style.display = "block";
 
 
             visSporsmal();
 
         }
 
+
+        /* BLAND SVAR */
 
         function blandSvar(svar) {
 
@@ -327,35 +395,49 @@
         }
 
 
+        /* VIS SPØRSMÅL */
+
         function visSporsmal() {
 
             let aktueltSporsmal =
                 sporsmal[sporsmalNummer];
 
 
-            document.getElementById("sporsmalTeller").textContent =
-                "Spørsmål " +
-                (sporsmalNummer + 1) +
-                " av " +
-                sporsmal.length;
+            document
+                .getElementById("sporsmalTeller")
+                .textContent =
+                    "Spørsmål " +
+                    (sporsmalNummer + 1) +
+                    " av " +
+                    sporsmal.length;
 
 
-            document.getElementById("sporsmal").textContent =
-                aktueltSporsmal.tekst;
+            document
+                .getElementById("sporsmal")
+                .textContent =
+                    aktueltSporsmal.tekst;
 
 
             let svaralternativer =
-                document.getElementById("svaralternativer");
+                document
+                    .getElementById(
+                        "svaralternativer"
+                    );
 
 
-            svaralternativer.innerHTML = "";
+            svaralternativer.innerHTML =
+                "";
 
 
-            blandSvar(aktueltSporsmal.svar).forEach(
+            blandSvar(
+                aktueltSporsmal.svar
+            ).forEach(
                 function(alternativ) {
 
                     let knapp =
-                        document.createElement("button");
+                        document.createElement(
+                            "button"
+                        );
 
 
                     knapp.textContent =
@@ -370,21 +452,26 @@
                         };
 
 
-                    svaralternativer.appendChild(knapp);
+                    svaralternativer
+                        .appendChild(knapp);
 
                 }
             );
 
 
-            document.getElementById("resultat").textContent =
-                "";
+            document
+                .getElementById("resultat")
+                .textContent = "";
 
 
-            document.getElementById("neste").style.display =
-                "none";
+            document
+                .getElementById("neste")
+                .style.display = "none";
 
         }
 
+
+        /* SVAR */
 
         function svar(valg) {
 
@@ -393,16 +480,21 @@
 
 
             let resultat =
-                document.getElementById("resultat");
+                document
+                    .getElementById("resultat");
 
 
-            if (valg === aktueltSporsmal.riktig) {
+            if (
+                valg ===
+                aktueltSporsmal.riktig
+            ) {
 
                 poeng++;
 
 
-                document.getElementById("poeng").textContent =
-                    poeng;
+                document
+                    .getElementById("poeng")
+                    .textContent = poeng;
 
 
                 resultat.textContent =
@@ -431,43 +523,60 @@
             );
 
 
-            document.getElementById("neste").style.display =
-                "inline-block";
+            document
+                .getElementById("neste")
+                .style.display =
+                    "inline-block";
 
         }
 
+
+        /* NESTE SPØRSMÅL */
 
         async function nesteSporsmal() {
 
             sporsmalNummer++;
 
 
-            if (sporsmalNummer < sporsmal.length) {
+            if (
+                sporsmalNummer <
+                sporsmal.length
+            ) {
 
                 visSporsmal();
 
             } else {
 
-                document.getElementById("sporsmal").textContent =
-                    "🎉 Konkurransen er ferdig!";
+                document
+                    .getElementById("sporsmal")
+                    .textContent =
+                        "🎉 Konkurransen er ferdig!";
 
 
-                document.getElementById("svaralternativer").innerHTML =
-                    "";
+                document
+                    .getElementById(
+                        "svaralternativer"
+                    )
+                    .innerHTML = "";
 
 
-                document.getElementById("resultat").textContent =
-                    navn +
-                    ", du fikk " +
-                    poeng +
-                    " av " +
-                    sporsmal.length +
-                    " poeng!";
+                document
+                    .getElementById("resultat")
+                    .textContent =
+                        navn +
+                        ", du fikk " +
+                        poeng +
+                        " av " +
+                        sporsmal.length +
+                        " poeng!";
 
 
-                document.getElementById("neste").style.display =
-                    "none";
+                document
+                    .getElementById("neste")
+                    .style.display = "none";
 
+
+                /* LAGRE RESULTAT */
 
                 let { error } =
                     await supabaseClient
@@ -486,8 +595,10 @@
                     );
 
 
-                    document.getElementById("resultat").textContent +=
-                        " ⚠️ Resultatet kunne ikke lagres.";
+                    document
+                        .getElementById("resultat")
+                        .textContent +=
+                            " ⚠️ Resultatet kunne ikke lagres.";
 
                 } else {
 
@@ -496,8 +607,12 @@
                 }
 
 
+                /* SPILL IGJEN */
+
                 let spillIgjen =
-                    document.createElement("button");
+                    document.createElement(
+                        "button"
+                    );
 
 
                 spillIgjen.textContent =
@@ -513,27 +628,41 @@
 
 
                 document
-                    .getElementById("svaralternativer")
-                    .appendChild(spillIgjen);
+                    .getElementById(
+                        "svaralternativer"
+                    )
+                    .appendChild(
+                        spillIgjen
+                    );
 
             }
 
         }
 
 
+        /* RESULTATLISTE */
+
         async function visResultatliste() {
 
             let { data, error } =
                 await supabaseClient
                     .from("Resultater")
-                    .select("navn, poeng, created_at")
-                    .order("poeng", {
-                        ascending: false
-                    });
+                    .select(
+                        "navn, poeng, created_at"
+                    )
+                    .order(
+                        "poeng",
+                        {
+                            ascending: false
+                        }
+                    );
 
 
             let resultatliste =
-                document.getElementById("resultatliste");
+                document
+                    .getElementById(
+                        "resultatliste"
+                    );
 
 
             resultatliste.innerHTML =
@@ -561,7 +690,9 @@
                 function(resultat) {
 
                     let rad =
-                        document.createElement("div");
+                        document.createElement(
+                            "div"
+                        );
 
 
                     rad.className =
@@ -569,7 +700,9 @@
 
 
                     let dato =
-                        new Date(resultat.created_at);
+                        new Date(
+                            resultat.created_at
+                        );
 
 
                     let datoFormatert =
@@ -582,14 +715,18 @@
                         "<strong>" +
                         resultat.navn +
                         "</strong>" +
+
                         '<div class="resultatdato">' +
+
                         resultat.poeng +
                         "p, " +
                         datoFormatert +
+
                         "</div>";
 
 
-                    resultatliste.appendChild(rad);
+                    resultatliste
+                        .appendChild(rad);
 
                 }
             );
@@ -597,20 +734,30 @@
         }
 
 
+        /* TOPP 5 PÅ FORSIDEN */
+
         async function visToppFem() {
 
             let { data, error } =
                 await supabaseClient
                     .from("Resultater")
-                    .select("navn, poeng")
-                    .order("poeng", {
-                        ascending: false
-                    })
+                    .select(
+                        "navn, poeng"
+                    )
+                    .order(
+                        "poeng",
+                        {
+                            ascending: false
+                        }
+                    )
                     .limit(5);
 
 
             let toppFem =
-                document.getElementById("toppFem");
+                document
+                    .getElementById(
+                        "toppFem"
+                    );
 
 
             if (error) {
@@ -639,7 +786,9 @@
                 function(resultat, index) {
 
                     let rad =
-                        document.createElement("p");
+                        document.createElement(
+                            "p"
+                        );
 
 
                     rad.className =
@@ -655,13 +804,16 @@
                         " poeng";
 
 
-                    toppFem.appendChild(rad);
+                    toppFem
+                        .appendChild(rad);
 
                 }
             );
 
         }
 
+
+        /* HENT TOPP 5 NÅR SIDEN ÅPNES */
 
         visToppFem();
 
