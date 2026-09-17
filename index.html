@@ -30,6 +30,17 @@
             padding: 12px 24px;
             font-size: 18px;
             cursor: pointer;
+            margin: 5px;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        #resultat {
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -40,92 +51,135 @@
 
     <p>Velkommen!</p>
 
-   <div class="konkurranse" id="quiz">
-    <h2>Ukens konkurranse</h2>
-<p>Poeng: <span id="poeng">0</span></p>
-       
-   <p id="sporsmal">Hva er hovedstaden i Norge?</p>
+    <div class="konkurranse">
 
-<div id="svaralternativer">
-    <button onclick="svar('Oslo')">Oslo</button>
-    <button onclick="svar('Bergen')">Bergen</button>
-    <button onclick="svar('Trondheim')">Trondheim</button>
-</div>
+        <h2>Ukens konkurranse</h2>
 
-<p id="resultat"></p>
+        <p>Poeng: <span id="poeng">0</span></p>
 
-<button id="neste" onclick="nesteSporsmal()" style="display:none;">
-    Neste spørsmål
-</button>
-</div>
-    
-<script>
-    let poeng = 0;
-let sporsmalNummer = 0;
+        <p id="sporsmal"></p>
 
-let sporsmal = [
-    {
-        tekst: "Hva er hovedstaden i Norge?",
-        svar: ["Oslo", "Bergen", "Trondheim"],
-        riktig: "Oslo"
-    },
-    {
-        tekst: "Hvilken planet er nærmest solen?",
-        svar: ["Jorden", "Merkur", "Mars"],
-        riktig: "Merkur"
-    }
-];
+        <div id="svaralternativer"></div>
 
-  function svar(valg) {
-    const resultat = document.getElementById("resultat");
+        <p id="resultat"></p>
 
-    let riktigSvar;
+        <button id="neste" onclick="nesteSporsmal()" style="display: none;">
+            Neste spørsmål
+        </button>
 
-    if (sporsmalNummer === 1) {
-        riktigSvar = "Oslo";
-    } else if (sporsmalNummer === 2) {
-        riktigSvar = "Merkur";
-    }
+    </div>
 
-    if (valg === riktigSvar) {
-        poeng++;
-        document.getElementById("poeng").textContent = poeng;
-        resultat.textContent = "✅ Riktig svar!";
-    } else {
-        resultat.textContent = "❌ Feil svar!";
-    }
+    <script>
 
-    // Deaktiver alle svaralternativene
-    const knapper = document.querySelectorAll("#svaralternativer button");
+        let poeng = 0;
+        let sporsmalNummer = 0;
 
-    knapper.forEach(function(knapp) {
-        knapp.disabled = true;
-    });
+        let sporsmal = [
+            {
+                tekst: "Hva er hovedstaden i Norge?",
+                svar: ["Oslo", "Bergen", "Trondheim"],
+                riktig: "Oslo"
+            },
+            {
+                tekst: "Hvilken planet er nærmest solen?",
+                svar: ["Jorden", "Merkur", "Mars"],
+                riktig: "Merkur"
+            }
+        ];
 
-    // Vis Neste-spørsmål
-    document.getElementById("neste").style.display = "inline-block";
-}
 
-    function nesteSporsmal() {
+        function visSporsmal() {
 
-        if (sporsmalNummer === 1) {
-
-            sporsmalNummer = 2;
+            let aktueltSporsmal = sporsmal[sporsmalNummer];
 
             document.getElementById("sporsmal").textContent =
-                "Hvilken planet er nærmest solen?";
+                aktueltSporsmal.tekst;
 
-            document.getElementById("svaralternativer").innerHTML = `
-                <button onclick="svar('Jorden')">Jorden</button>
-                <button onclick="svar('Merkur')">Merkur</button>
-                <button onclick="svar('Mars')">Mars</button>
-            `;
+            let svaralternativer =
+                document.getElementById("svaralternativer");
+
+            svaralternativer.innerHTML = "";
+
+            aktueltSporsmal.svar.forEach(function(alternativ) {
+
+                let knapp = document.createElement("button");
+
+                knapp.textContent = alternativ;
+
+                knapp.onclick = function() {
+                    svar(alternativ);
+                };
+
+                svaralternativer.appendChild(knapp);
+
+            });
 
             document.getElementById("resultat").textContent = "";
+
             document.getElementById("neste").style.display = "none";
         }
-    }
-</script>
-    
+
+
+        function svar(valg) {
+
+            let aktueltSporsmal = sporsmal[sporsmalNummer];
+
+            let resultat = document.getElementById("resultat");
+
+            if (valg === aktueltSporsmal.riktig) {
+
+                poeng++;
+
+                document.getElementById("poeng").textContent = poeng;
+
+                resultat.textContent = "✅ Riktig svar!";
+
+            } else {
+
+                resultat.textContent = "❌ Feil svar!";
+
+            }
+
+
+            let knapper =
+                document.querySelectorAll("#svaralternativer button");
+
+            knapper.forEach(function(knapp) {
+                knapp.disabled = true;
+            });
+
+
+            document.getElementById("neste").style.display =
+                "inline-block";
+        }
+
+
+        function nesteSporsmal() {
+
+            sporsmalNummer++;
+
+            if (sporsmalNummer < sporsmal.length) {
+
+                visSporsmal();
+
+            } else {
+
+                document.getElementById("sporsmal").textContent =
+                    "Konkurransen er ferdig!";
+
+                document.getElementById("svaralternativer").innerHTML = "";
+
+                document.getElementById("resultat").textContent =
+                    "Du fikk " + poeng + " poeng!";
+
+                document.getElementById("neste").style.display = "none";
+            }
+        }
+
+
+        visSporsmal();
+
+    </script>
+
 </body>
 </html>
