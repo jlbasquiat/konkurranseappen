@@ -158,39 +158,39 @@
         }
 
 
-        function visSporsmal() {
+      function visSporsmal() {
 
-            let aktueltSporsmal = sporsmal[sporsmalNummer];
+    let aktueltSporsmal = sporsmal[sporsmalNummer];
 
-            document.getElementById("sporsmalTeller").textContent =
-    "Spørsmål " + (sporsmalNummer + 1) + " av " + sporsmal.length;
+    document.getElementById("sporsmalTeller").textContent =
+        "Spørsmål " + (sporsmalNummer + 1) + " av " + sporsmal.length;
 
-            document.getElementById("sporsmal").textContent =
-                aktueltSporsmal.tekst;
+    document.getElementById("sporsmal").textContent =
+        aktueltSporsmal.tekst;
 
-            let svaralternativer =
-                document.getElementById("svaralternativer");
+    let svaralternativer =
+        document.getElementById("svaralternativer");
 
-            svaralternativer.innerHTML = "";
+    svaralternativer.innerHTML = "";
 
-            aktueltSporsmal.svar.forEach(function(alternativ) {
+    aktueltSporsmal.svar.forEach(function(alternativ) {
 
-                let knapp = document.createElement("button");
+        let knapp = document.createElement("button");
 
-                knapp.textContent = alternativ;
+        knapp.textContent = alternativ;
 
-                knapp.onclick = function() {
-                    svar(alternativ);
-                };
+        knapp.onclick = function() {
+            svar(alternativ);
+        };
 
-                svaralternativer.appendChild(knapp);
+        svaralternativer.appendChild(knapp);
 
-            });
+    });
 
-            document.getElementById("resultat").textContent = "";
+    document.getElementById("resultat").textContent = "";
 
-            document.getElementById("neste").style.display = "none";
-        }
+    document.getElementById("neste").style.display = "none";
+}
 
 
         function svar(valg) {
