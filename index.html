@@ -264,12 +264,14 @@
         });
 
         localStorage.setItem(
-            "resultater",
-            JSON.stringify(resultater)
-        );
+    "resultater",
+    JSON.stringify(resultater)
+);
+
+visResultatliste();
 
 
-        let spillIgjen = document.createElement("button");
+let spillIgjen = document.createElement("button");
 
         spillIgjen.textContent = "🔄 Spill igjen";
 
@@ -279,6 +281,27 @@
 
         document.getElementById("svaralternativer").appendChild(spillIgjen);
     }
+        function visResultatliste() {
+
+    let resultater =
+        JSON.parse(localStorage.getItem("resultater")) || [];
+
+    let resultatliste =
+        document.getElementById("resultatliste");
+
+    resultatliste.innerHTML = "<h3>🏆 Resultatliste</h3>";
+
+    resultater.forEach(function(resultat) {
+
+        let rad = document.createElement("p");
+
+        rad.textContent =
+            resultat.navn + " – " + resultat.poeng + " poeng";
+
+        resultatliste.appendChild(rad);
+
+    });
+}
 }
 
 
