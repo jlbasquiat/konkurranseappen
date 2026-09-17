@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="no">
 <head>
@@ -158,39 +159,44 @@
         }
 
 
-      function visSporsmal() {
+        function blandSvar(svar) {
+            return svar.sort(() => Math.random() - 0.5);
+        }
 
-    let aktueltSporsmal = sporsmal[sporsmalNummer];
 
-    document.getElementById("sporsmalTeller").textContent =
-        "Spørsmål " + (sporsmalNummer + 1) + " av " + sporsmal.length;
+        function visSporsmal() {
 
-    document.getElementById("sporsmal").textContent =
-        aktueltSporsmal.tekst;
+            let aktueltSporsmal = sporsmal[sporsmalNummer];
 
-    let svaralternativer =
-        document.getElementById("svaralternativer");
+            document.getElementById("sporsmalTeller").textContent =
+                "Spørsmål " + (sporsmalNummer + 1) + " av " + sporsmal.length;
 
-    svaralternativer.innerHTML = "";
+            document.getElementById("sporsmal").textContent =
+                aktueltSporsmal.tekst;
 
-    aktueltSporsmal.svar.forEach(function(alternativ) {
+            let svaralternativer =
+                document.getElementById("svaralternativer");
 
-        let knapp = document.createElement("button");
+            svaralternativer.innerHTML = "";
 
-        knapp.textContent = alternativ;
+            blandSvar(aktueltSporsmal.svar).forEach(function(alternativ) {
 
-        knapp.onclick = function() {
-            svar(alternativ);
-        };
+                let knapp = document.createElement("button");
 
-        svaralternativer.appendChild(knapp);
+                knapp.textContent = alternativ;
 
-    });
+                knapp.onclick = function() {
+                    svar(alternativ);
+                };
 
-    document.getElementById("resultat").textContent = "";
+                svaralternativer.appendChild(knapp);
 
-    document.getElementById("neste").style.display = "none";
-}
+            });
+
+            document.getElementById("resultat").textContent = "";
+
+            document.getElementById("neste").style.display = "none";
+        }
 
 
         function svar(valg) {
@@ -254,3 +260,4 @@
 
 </body>
 </html>
+```
