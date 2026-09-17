@@ -86,6 +86,7 @@
         <p>Poeng: <span id="poeng">0</span></p>
 
         <p id="sporsmal"></p>
+        <p id="sporsmalTeller"></p>
 
         <div id="svaralternativer"></div>
 
@@ -160,6 +161,9 @@
         function visSporsmal() {
 
             let aktueltSporsmal = sporsmal[sporsmalNummer];
+
+            document.getElementById("sporsmalTeller").textContent =
+    "Spørsmål " + (sporsmalNummer + 1) + " av " + sporsmal.length;
 
             document.getElementById("sporsmal").textContent =
                 aktueltSporsmal.tekst;
