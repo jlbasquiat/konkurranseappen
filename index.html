@@ -113,14 +113,20 @@
         let poeng = 0;
         let sporsmalNummer = 0;
         let navn = "";
-const supabaseUrl = "https://ukxevteqkihqfycqjrou.supabase.co";
 
-const supabaseKey = "sb_publishable_ulauPK9fAZF8ndLKUlACxg_uvNnGtiU";
 
-const supabaseClient = supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
+        const supabaseUrl =
+            "https://ukxevteqkihqfycqjrou.supabase.co";
+
+        const supabaseKey =
+            "sb_publishable_ulauPK9fAZF8ndLKUlACxg_uvNnGtiU";
+
+        const supabaseClient =
+            supabase.createClient(
+                supabaseUrl,
+                supabaseKey
+            );
+
 
         let sporsmal = [
             {
@@ -214,7 +220,8 @@ const supabaseClient = supabase.createClient(
 
             let aktueltSporsmal = sporsmal[sporsmalNummer];
 
-            let resultat = document.getElementById("resultat");
+            let resultat =
+                document.getElementById("resultat");
 
             if (valg === aktueltSporsmal.riktig) {
 
@@ -232,7 +239,9 @@ const supabaseClient = supabase.createClient(
 
 
             let knapper =
-                document.querySelectorAll("#svaralternativer button");
+                document.querySelectorAll(
+                    "#svaralternativer button"
+                );
 
             knapper.forEach(function(knapp) {
                 knapp.disabled = true;
@@ -244,7 +253,7 @@ const supabaseClient = supabase.createClient(
         }
 
 
-        function nesteSporsmal() {
+        async function nesteSporsmal() {
 
             sporsmalNummer++;
 
@@ -265,51 +274,85 @@ const supabaseClient = supabase.createClient(
                 document.getElementById("neste").style.display = "none";
 
 
-                let resultater =
-                    JSON.parse(localStorage.getItem("resultater")) || [];
-
-                resultater.push({
-                    navn: navn,
-                    poeng: poeng
-                });
-
-                localStorage.setItem(
-                    "resultater",
-                    JSON.stringify(resultater)
-                );
-
-                visResultatliste();
+                let { error } = await supabaseClient
+                    .from("Resultater")
+                    .insert({
+                        navn: navn,
+                        poeng: poeng
+                    });
 
 
-                let spillIgjen = document.createElement("button");
+                if (error) {
 
-                spillIgjen.textContent = "🔄 Spill igjen";
+                    console.error("Feil ved lagring:", error);
+
+                    document.getElementById("resultat").textContent +=
+                        " ⚠️ Resultatet kunne ikke lagres.";
+
+                } else {
+
+                    await visResultatliste();
+
+                }
+
+
+                let spillIgjen =
+                    document.createElement("button");
+
+                spillIgjen.textContent =
+                    "🔄 Spill igjen";
 
                 spillIgjen.onclick = function() {
                     location.reload();
                 };
 
-                document.getElementById("svaralternativer").appendChild(spillIgjen);
+                document
+                    .getElementById("svaralternativer")
+                    .appendChild(spillIgjen);
             }
         }
 
 
-        function visResultatliste() {
+        async function visResultatliste() {
 
-            let resultater =
-                JSON.parse(localStorage.getItem("resultater")) || [];
+            let { data, error } =
+                await supabaseClient
+                    .from("Resultater")
+                    .select("navn, poeng")
+                    .order("poeng", { ascending: false });
+
 
             let resultatliste =
                 document.getElementById("resultatliste");
 
-            resultatliste.innerHTML = "<h3>🏆 Resultatliste</h3>";
+            resultatliste.innerHTML =
+                "<h3>🏆 Resultatliste</h3>";
 
-            resultater.forEach(function(resultat) {
 
-                let rad = document.createElement("p");
+            if (error) {
+
+                resultatliste.innerHTML +=
+                    "<p>Kunne ikke hente resultatlisten.</p>";
+
+                console.error(
+                    "Feil ved henting av resultater:",
+                    error
+                );
+
+                return;
+            }
+
+
+            data.forEach(function(resultat) {
+
+                let rad =
+                    document.createElement("p");
 
                 rad.textContent =
-                    resultat.navn + " – " + resultat.poeng + " poeng";
+                    resultat.navn +
+                    " – " +
+                    resultat.poeng +
+                    " poeng";
 
                 resultatliste.appendChild(rad);
 
