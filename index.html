@@ -113,7 +113,14 @@
         let poeng = 0;
         let sporsmalNummer = 0;
         let navn = "";
+const supabaseUrl = "https://ukxevteqkihqfycqjrou.supabase.co";
 
+const supabaseKey = "sb_publishable_ulauPK9fAZF8ndLKUlACxg_uvNnGtiU";
+
+const supabaseClient = supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
 
         let sporsmal = [
             {
