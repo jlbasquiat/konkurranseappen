@@ -40,17 +40,27 @@
 
     <p>Velkommen!</p>
 
-    <div class="konkurranse">
-        <h2>Ukens konkurranse</h2>
+   <div class="konkurranse" id="quiz">
+    <h2>Ukens konkurranse</h2>
 
-        <p>Her kommer spørsmålet vårt.</p>
+    <p id="sporsmal">Hva er hovedstaden i Norge?</p>
 
-        <button onclick="startKonkurranse()">Svar på konkurransen</button>
-    </div>
+    <button onclick="svar('Oslo')">Oslo</button>
+    <button onclick="svar('Bergen')">Bergen</button>
+    <button onclick="svar('Trondheim')">Trondheim</button>
+
+    <p id="resultat"></p>
+</div>
     
 <script>
-    function startKonkurranse() {
-        alert("Konkurransen starter nå!");
+    function svar(valg) {
+        const resultat = document.getElementById("resultat");
+
+        if (valg === "Oslo") {
+            resultat.textContent = "✅ Riktig svar!";
+        } else {
+            resultat.textContent = "❌ Feil svar. Prøv igjen!";
+        }
     }
 </script>
     
