@@ -104,208 +104,209 @@
 
     </div>
 
+<script>
 
-    <script>
-
-        let poeng = 0;
-        let sporsmalNummer = 0;
-        let navn = "";
-
-
-        let sporsmal = [
-            {
-                tekst: "Hva er hovedstaden i Norge?",
-                svar: ["Oslo", "Bergen", "Trondheim"],
-                riktig: "Oslo"
-            },
-            {
-                tekst: "Hvilken planet er nærmest solen?",
-                svar: ["Jorden", "Merkur", "Mars"],
-                riktig: "Merkur"
-            },
-            {
-                tekst: "Hvor mange dager er det i en uke?",
-                svar: ["5", "7", "10"],
-                riktig: "7"
-            },
-            {
-                tekst: "Hvilket dyr er kjent som menneskets beste venn?",
-                svar: ["Katt", "Hund", "Hest"],
-                riktig: "Hund"
-            },
-            {
-                tekst: "Hva heter Norges lengste elv?",
-                svar: ["Glomma", "Drammenselva", "Lågen"],
-                riktig: "Glomma"
-            }
-        ];
+    let poeng = 0;
+    let sporsmalNummer = 0;
+    let navn = "";
 
 
-        function startKonkurranse() {
+    let sporsmal = [
+        {
+            tekst: "Hva er hovedstaden i Norge?",
+            svar: ["Oslo", "Bergen", "Trondheim"],
+            riktig: "Oslo"
+        },
+        {
+            tekst: "Hvilken planet er nærmest solen?",
+            svar: ["Jorden", "Merkur", "Mars"],
+            riktig: "Merkur"
+        },
+        {
+            tekst: "Hvor mange dager er det i en uke?",
+            svar: ["5", "7", "10"],
+            riktig: "7"
+        },
+        {
+            tekst: "Hvilket dyr er kjent som menneskets beste venn?",
+            svar: ["Katt", "Hund", "Hest"],
+            riktig: "Hund"
+        },
+        {
+            tekst: "Hva heter Norges lengste elv?",
+            svar: ["Glomma", "Drammenselva", "Lågen"],
+            riktig: "Glomma"
+        }
+    ];
 
-            navn = document.getElementById("navn").value;
 
-            if (navn === "") {
-                alert("Skriv inn navnet ditt først!");
-                return;
-            }
+    function startKonkurranse() {
 
-            document.getElementById("spiller").textContent = navn;
+        navn = document.getElementById("navn").value;
 
-            document.getElementById("startside").style.display = "none";
+        if (navn === "") {
+            alert("Skriv inn navnet ditt først!");
+            return;
+        }
 
-            document.getElementById("quiz").style.display = "block";
+        document.getElementById("spiller").textContent = navn;
 
-            visSporsmal();
+        document.getElementById("startside").style.display = "none";
+
+        document.getElementById("quiz").style.display = "block";
+
+        visSporsmal();
+    }
+
+
+    function blandSvar(svar) {
+        return svar.sort(() => Math.random() - 0.5);
+    }
+
+
+    function visSporsmal() {
+
+        let aktueltSporsmal = sporsmal[sporsmalNummer];
+
+        document.getElementById("sporsmalTeller").textContent =
+            "Spørsmål " + (sporsmalNummer + 1) + " av " + sporsmal.length;
+
+        document.getElementById("sporsmal").textContent =
+            aktueltSporsmal.tekst;
+
+        let svaralternativer =
+            document.getElementById("svaralternativer");
+
+        svaralternativer.innerHTML = "";
+
+        blandSvar(aktueltSporsmal.svar).forEach(function(alternativ) {
+
+            let knapp = document.createElement("button");
+
+            knapp.textContent = alternativ;
+
+            knapp.onclick = function() {
+                svar(alternativ);
+            };
+
+            svaralternativer.appendChild(knapp);
+
+        });
+
+        document.getElementById("resultat").textContent = "";
+
+        document.getElementById("neste").style.display = "none";
+    }
+
+
+    function svar(valg) {
+
+        let aktueltSporsmal = sporsmal[sporsmalNummer];
+
+        let resultat = document.getElementById("resultat");
+
+        if (valg === aktueltSporsmal.riktig) {
+
+            poeng++;
+
+            document.getElementById("poeng").textContent = poeng;
+
+            resultat.textContent = "✅ Riktig svar!";
+
+        } else {
+
+            resultat.textContent = "❌ Feil svar!";
+
         }
 
 
-        function blandSvar(svar) {
-            return svar.sort(() => Math.random() - 0.5);
-        }
+        let knapper =
+            document.querySelectorAll("#svaralternativer button");
+
+        knapper.forEach(function(knapp) {
+            knapp.disabled = true;
+        });
 
 
-        function visSporsmal() {
-
-            let aktueltSporsmal = sporsmal[sporsmalNummer];
-
-            document.getElementById("sporsmalTeller").textContent =
-                "Spørsmål " + (sporsmalNummer + 1) + " av " + sporsmal.length;
-
-            document.getElementById("sporsmal").textContent =
-                aktueltSporsmal.tekst;
-
-            let svaralternativer =
-                document.getElementById("svaralternativer");
-
-            svaralternativer.innerHTML = "";
-
-            blandSvar(aktueltSporsmal.svar).forEach(function(alternativ) {
-
-                let knapp = document.createElement("button");
-
-                knapp.textContent = alternativ;
-
-                knapp.onclick = function() {
-                    svar(alternativ);
-                };
-
-                svaralternativer.appendChild(knapp);
-
-            });
-
-            document.getElementById("resultat").textContent = "";
-
-            document.getElementById("neste").style.display = "none";
-        }
-
-
-        function svar(valg) {
-
-            let aktueltSporsmal = sporsmal[sporsmalNummer];
-
-            let resultat = document.getElementById("resultat");
-
-            if (valg === aktueltSporsmal.riktig) {
-
-                poeng++;
-
-                document.getElementById("poeng").textContent = poeng;
-
-                resultat.textContent = "✅ Riktig svar!";
-
-            } else {
-
-                resultat.textContent = "❌ Feil svar!";
-
-            }
-
-
-            let knapper =
-                document.querySelectorAll("#svaralternativer button");
-
-            knapper.forEach(function(knapp) {
-                knapp.disabled = true;
-            });
-
-
-            document.getElementById("neste").style.display =
-                "inline-block";
-        }
+        document.getElementById("neste").style.display =
+            "inline-block";
+    }
 
 
     function nesteSporsmal() {
 
-    sporsmalNummer++;
+        sporsmalNummer++;
 
-    if (sporsmalNummer < sporsmal.length) {
+        if (sporsmalNummer < sporsmal.length) {
 
-        visSporsmal();
+            visSporsmal();
 
-    } else {
+        } else {
 
-        document.getElementById("sporsmal").textContent =
-            "🎉 Konkurransen er ferdig!";
+            document.getElementById("sporsmal").textContent =
+                "🎉 Konkurransen er ferdig!";
 
-        document.getElementById("svaralternativer").innerHTML = "";
+            document.getElementById("svaralternativer").innerHTML = "";
 
-        document.getElementById("resultat").textContent =
-            navn + ", du fikk " + poeng + " av " + sporsmal.length + " poeng!";
+            document.getElementById("resultat").textContent =
+                navn + ", du fikk " + poeng + " av " + sporsmal.length + " poeng!";
 
-        document.getElementById("neste").style.display = "none";
+            document.getElementById("neste").style.display = "none";
 
+
+            let resultater =
+                JSON.parse(localStorage.getItem("resultater")) || [];
+
+            resultater.push({
+                navn: navn,
+                poeng: poeng
+            });
+
+            localStorage.setItem(
+                "resultater",
+                JSON.stringify(resultater)
+            );
+
+            visResultatliste();
+
+
+            let spillIgjen = document.createElement("button");
+
+            spillIgjen.textContent = "🔄 Spill igjen";
+
+            spillIgjen.onclick = function() {
+                location.reload();
+            };
+
+            document.getElementById("svaralternativer").appendChild(spillIgjen);
+        }
+    }
+
+
+    function visResultatliste() {
 
         let resultater =
             JSON.parse(localStorage.getItem("resultater")) || [];
 
-        resultater.push({
-            navn: navn,
-            poeng: poeng
+        let resultatliste =
+            document.getElementById("resultatliste");
+
+        resultatliste.innerHTML = "<h3>🏆 Resultatliste</h3>";
+
+        resultater.forEach(function(resultat) {
+
+            let rad = document.createElement("p");
+
+            rad.textContent =
+                resultat.navn + " – " + resultat.poeng + " poeng";
+
+            resultatliste.appendChild(rad);
+
         });
-
-        localStorage.setItem(
-    "resultater",
-    JSON.stringify(resultater)
-);
-
-visResultatliste();
-
-
-let spillIgjen = document.createElement("button");
-
-        spillIgjen.textContent = "🔄 Spill igjen";
-
-        spillIgjen.onclick = function() {
-            location.reload();
-        };
-
-        document.getElementById("svaralternativer").appendChild(spillIgjen);
     }
-        function visResultatliste() {
-
-    let resultater =
-        JSON.parse(localStorage.getItem("resultater")) || [];
-
-    let resultatliste =
-        document.getElementById("resultatliste");
-
-    resultatliste.innerHTML = "<h3>🏆 Resultatliste</h3>";
-
-    resultater.forEach(function(resultat) {
-
-        let rad = document.createElement("p");
-
-        rad.textContent =
-            resultat.navn + " – " + resultat.poeng + " poeng";
-
-        resultatliste.appendChild(rad);
-
-    });
-}
-}
 
 
-    </script>
+</script>
 
 </body>
 </html>
