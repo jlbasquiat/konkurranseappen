@@ -234,37 +234,52 @@
         }
 
 
-        function nesteSporsmal() {
+    function nesteSporsmal() {
 
-            sporsmalNummer++;
+    sporsmalNummer++;
 
-            if (sporsmalNummer < sporsmal.length) {
+    if (sporsmalNummer < sporsmal.length) {
 
-                visSporsmal();
+        visSporsmal();
 
-            } else {
+    } else {
 
-                document.getElementById("sporsmal").textContent =
-                    "🎉 Konkurransen er ferdig!";
+        document.getElementById("sporsmal").textContent =
+            "🎉 Konkurransen er ferdig!";
 
-                document.getElementById("svaralternativer").innerHTML = "";
+        document.getElementById("svaralternativer").innerHTML = "";
 
-                document.getElementById("resultat").textContent =
-                    navn + ", du fikk " + poeng + " av " + sporsmal.length + " poeng!";
+        document.getElementById("resultat").textContent =
+            navn + ", du fikk " + poeng + " av " + sporsmal.length + " poeng!";
 
-                document.getElementById("neste").style.display = "none";
+        document.getElementById("neste").style.display = "none";
 
-                let spillIgjen = document.createElement("button");
 
-                spillIgjen.textContent = "🔄 Spill igjen";
+        let resultater =
+            JSON.parse(localStorage.getItem("resultater")) || [];
 
-                spillIgjen.onclick = function() {
-                    location.reload();
-                };
+        resultater.push({
+            navn: navn,
+            poeng: poeng
+        });
 
-                document.getElementById("svaralternativer").appendChild(spillIgjen);
-            }
-        }
+        localStorage.setItem(
+            "resultater",
+            JSON.stringify(resultater)
+        );
+
+
+        let spillIgjen = document.createElement("button");
+
+        spillIgjen.textContent = "🔄 Spill igjen";
+
+        spillIgjen.onclick = function() {
+            location.reload();
+        };
+
+        document.getElementById("svaralternativer").appendChild(spillIgjen);
+    }
+}
 
 
     </script>
