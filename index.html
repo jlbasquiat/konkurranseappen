@@ -63,7 +63,7 @@
     let poeng = 0;
     let sporsmalNummer = 1;
 
-   function svar(valg) {
+  function svar(valg) {
     const resultat = document.getElementById("resultat");
 
     let riktigSvar;
@@ -82,7 +82,16 @@
         resultat.textContent = "❌ Feil svar!";
     }
 
+    // Deaktiver alle svaralternativene
+    const knapper = document.querySelectorAll("#svaralternativer button");
+
+    knapper.forEach(function(knapp) {
+        knapp.disabled = true;
+    });
+
+    // Vis Neste-spørsmål
     document.getElementById("neste").style.display = "inline-block";
+}
 }
 
     function nesteSporsmal() {
