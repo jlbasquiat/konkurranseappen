@@ -7,6 +7,7 @@
     <title>Har vi det gøy nå?</title>
 
     <style>
+
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
@@ -16,10 +17,12 @@
             background-color: #f7f7f7;
         }
 
+
         h1 {
             font-size: 40px;
             margin-bottom: 10px;
         }
+
 
         .konkurranse {
             border: 1px solid #ddd;
@@ -29,6 +32,7 @@
             background-color: white;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
+
 
         input {
             padding: 12px;
@@ -40,6 +44,7 @@
             box-sizing: border-box;
         }
 
+
         button {
             padding: 12px 24px;
             font-size: 18px;
@@ -50,14 +55,17 @@
             background-color: white;
         }
 
+
         button:hover {
             transform: translateY(-1px);
         }
 
+
         button:disabled {
             cursor: not-allowed;
-            opacity: 0.6;
+            opacity: 0.4;
         }
+
 
         #svaralternativer {
             display: flex;
@@ -67,6 +75,7 @@
             margin-top: 20px;
         }
 
+
         #svaralternativer button {
             width: 280px;
             min-height: 55px;
@@ -74,21 +83,25 @@
             border-radius: 10px;
         }
 
+
         #sporsmal {
             font-size: 28px;
             font-weight: bold;
             margin: 30px 0;
         }
 
+
         #sporsmalTeller {
             font-size: 16px;
             color: #666;
         }
 
+
         #poengVisning {
             font-size: 20px;
             font-weight: bold;
         }
+
 
         #resultat {
             font-size: 20px;
@@ -97,7 +110,7 @@
         }
 
 
-        /* RESULTATLISTE */
+        /* RESULTATLISTE PÅ SLUTTEN */
 
         #resultatliste {
             margin-top: 30px;
@@ -105,10 +118,12 @@
             text-align: center;
         }
 
+
         #resultatliste h3 {
             text-align: center;
             margin-bottom: 25px;
         }
+
 
         .resultatrad {
             width: 100%;
@@ -116,11 +131,13 @@
             margin: 0 auto 25px auto;
         }
 
+
         .resultatrad strong {
             display: block;
             width: 100%;
             text-align: center;
         }
+
 
         .resultatdato {
             display: block;
@@ -136,16 +153,22 @@
 
         #toppFem {
             margin-top: 30px;
+            width: 100%;
             text-align: center;
         }
+
 
         #toppFem h3 {
             text-align: center;
+            margin-bottom: 25px;
         }
 
-        .topprad {
-            padding: 8px 5px;
-            text-align: center;
+
+        #toppFem p {
+            width: 100%;
+            margin: 0 auto 20px auto;
+            padding: 8px 0;
+            text-align: center !important;
         }
 
 
@@ -158,19 +181,23 @@
                 padding: 15px;
             }
 
+
             h1 {
                 font-size: 32px;
             }
+
 
             .konkurranse {
                 padding: 20px;
                 margin-top: 20px;
             }
 
+
             input {
                 width: 80%;
                 max-width: 300px;
             }
+
 
             #svaralternativer button {
                 width: 100%;
@@ -178,17 +205,23 @@
                 min-height: 60px;
             }
 
+
             #sporsmal {
                 font-size: 24px;
             }
+
         }
+
     </style>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
+
 <body>
+
 
     <h1>🏆 Konkurransen</h1>
 
@@ -199,7 +232,10 @@
 
         <h2>Velkommen!</h2>
 
-        <p>Skriv inn navnet ditt, og klikk start.</p>
+        <p>
+            Skriv inn navnet ditt, og klikk start.
+        </p>
+
 
         <input
             type="text"
@@ -207,18 +243,28 @@
             placeholder="Ditt navn"
         >
 
+
         <br>
 
-        <button onclick="startKonkurranse()">
+
+        <button
+            id="startKnapp"
+            onclick="startKonkurranse()"
+            disabled
+        >
             Start
         </button>
 
+
+        <!-- TOPP 5 -->
 
         <div id="toppFem">
 
             <h3>🏆 Topp 5</h3>
 
-            <p>Laster resultater...</p>
+            <p>
+                Laster resultater...
+            </p>
 
         </div>
 
@@ -238,20 +284,27 @@
             <strong id="spiller"></strong>
         </p>
 
+
         <p id="poengVisning">
             ⭐ Poeng:
             <span id="poeng">0</span>
         </p>
 
+
         <p id="sporsmal"></p>
+
 
         <p id="sporsmalTeller"></p>
 
+
         <div id="svaralternativer"></div>
+
 
         <p id="resultat"></p>
 
+
         <div id="resultatliste"></div>
+
 
         <button
             id="neste"
@@ -266,8 +319,12 @@
 
     <script>
 
+        /* VARIABLER */
+
         let poeng = 0;
+
         let sporsmalNummer = 0;
+
         let navn = "";
 
 
@@ -276,8 +333,10 @@
         const supabaseUrl =
             "https://ukxevteqkihqfycqjrou.supabase.co";
 
+
         const supabaseKey =
             "sb_publishable_ulauPK9fAZF8ndLKUlACxg_uvNnGtiU";
+
 
         const supabaseClient =
             supabase.createClient(
@@ -300,6 +359,7 @@
                 riktig: "Oslo"
             },
 
+
             {
                 tekst: "Hvilken planet er nærmest solen?",
                 svar: [
@@ -309,6 +369,7 @@
                 ],
                 riktig: "Merkur"
             },
+
 
             {
                 tekst: "Hvor mange dager er det i en uke?",
@@ -320,6 +381,7 @@
                 riktig: "7"
             },
 
+
             {
                 tekst: "Hvilket dyr er kjent som menneskets beste venn?",
                 svar: [
@@ -329,6 +391,7 @@
                 ],
                 riktig: "Hund"
             },
+
 
             {
                 tekst: "Hva heter Norges lengste elv?",
@@ -343,7 +406,39 @@
         ];
 
 
-        /* START KONKURRANSEN */
+        /* STARTKNAPP */
+
+        document
+            .getElementById("navn")
+            .addEventListener(
+                "input",
+                function() {
+
+                    let navnInput =
+                        document.getElementById("navn");
+
+
+                    let startKnapp =
+                        document.getElementById("startKnapp");
+
+
+                    if (
+                        navnInput.value.trim() === ""
+                    ) {
+
+                        startKnapp.disabled = true;
+
+                    } else {
+
+                        startKnapp.disabled = false;
+
+                    }
+
+                }
+            );
+
+
+        /* START KONKURRANSE */
 
         function startKonkurranse() {
 
@@ -354,29 +449,22 @@
                     .trim();
 
 
-            if (navn === "") {
-
-                alert(
-                    "Skriv inn navnet ditt først!"
-                );
-
-                return;
-            }
-
-
             document
                 .getElementById("spiller")
-                .textContent = navn;
+                .textContent =
+                    navn;
 
 
             document
                 .getElementById("startside")
-                .style.display = "none";
+                .style.display =
+                    "none";
 
 
             document
                 .getElementById("quiz")
-                .style.display = "block";
+                .style.display =
+                    "block";
 
 
             visSporsmal();
@@ -419,10 +507,9 @@
 
 
             let svaralternativer =
-                document
-                    .getElementById(
-                        "svaralternativer"
-                    );
+                document.getElementById(
+                    "svaralternativer"
+                );
 
 
             svaralternativer.innerHTML =
@@ -461,12 +548,14 @@
 
             document
                 .getElementById("resultat")
-                .textContent = "";
+                .textContent =
+                    "";
 
 
             document
                 .getElementById("neste")
-                .style.display = "none";
+                .style.display =
+                    "none";
 
         }
 
@@ -480,13 +569,13 @@
 
 
             let resultat =
-                document
-                    .getElementById("resultat");
+                document.getElementById(
+                    "resultat"
+                );
 
 
             if (
-                valg ===
-                aktueltSporsmal.riktig
+                valg === aktueltSporsmal.riktig
             ) {
 
                 poeng++;
@@ -494,7 +583,8 @@
 
                 document
                     .getElementById("poeng")
-                    .textContent = poeng;
+                    .textContent =
+                        poeng;
 
 
                 resultat.textContent =
@@ -557,7 +647,8 @@
                     .getElementById(
                         "svaralternativer"
                     )
-                    .innerHTML = "";
+                    .innerHTML =
+                        "";
 
 
                 document
@@ -573,7 +664,8 @@
 
                 document
                     .getElementById("neste")
-                    .style.display = "none";
+                    .style.display =
+                        "none";
 
 
                 /* LAGRE RESULTAT */
@@ -659,10 +751,9 @@
 
 
             let resultatliste =
-                document
-                    .getElementById(
-                        "resultatliste"
-                    );
+                document.getElementById(
+                    "resultatliste"
+                );
 
 
             resultatliste.innerHTML =
@@ -754,10 +845,9 @@
 
 
             let toppFem =
-                document
-                    .getElementById(
-                        "toppFem"
-                    );
+                document.getElementById(
+                    "toppFem"
+                );
 
 
             if (error) {
@@ -789,10 +879,6 @@
                         document.createElement(
                             "p"
                         );
-
-
-                    rad.className =
-                        "topprad";
 
 
                     rad.textContent =
