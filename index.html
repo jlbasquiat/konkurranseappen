@@ -8,6 +8,10 @@
 
     <style>
 
+        /* =========================
+           GRUNNLEGGENDE
+           ========================= */
+
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
@@ -19,18 +23,38 @@
         }
 
 
+        /* =========================
+           HOVEDBOKSER
+           ========================= */
+
         .konkurranse {
             border: 1px solid #5C4B51;
             border-radius: 16px;
             padding: 30px;
-            margin-top: 30px;
+            margin-top: 25px;
             background-color: #F2EBBF;
             box-shadow: 0 4px 15px rgba(92, 75, 81, 0.15);
         }
 
 
+        /* EGNE BOKSER FOR TOPP 5 OG RESULTATLISTE */
+
+        .listeboks {
+            border: 1px solid #5C4B51;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 20px;
+            background-color: #F2EBBF;
+            box-shadow: 0 4px 15px rgba(92, 75, 81, 0.15);
+        }
+
+
+        /* =========================
+           NAVNEFELT
+           ========================= */
+
         input {
-            padding: 12px;
+            padding: 13px;
             font-size: 18px;
             width: 250px;
             margin: 10px;
@@ -49,6 +73,10 @@
         }
 
 
+        /* =========================
+           KNAPPER
+           ========================= */
+
         button {
             padding: 12px 24px;
             font-size: 18px;
@@ -58,6 +86,7 @@
             border-radius: 8px;
             background-color: white;
             color: #5C4B51;
+            transition: transform 0.15s ease;
         }
 
 
@@ -72,12 +101,18 @@
         }
 
 
-        /* STARTKNAPP */
+        /* =========================
+           STARTKNAPP
+           ========================= */
 
         #startKnapp {
+            min-width: 150px;
+            padding: 14px 28px;
             background-color: #ccc;
             color: white;
             border-color: #ccc;
+            font-size: 19px;
+            font-weight: bold;
         }
 
 
@@ -89,7 +124,98 @@
         }
 
 
-        /* SVARALTERNATIVER */
+        /* =========================
+           TOPP 5
+           ========================= */
+
+        #toppFem {
+            width: 100%;
+            text-align: center;
+            color: #5C4B51;
+        }
+
+
+        #toppFem h3 {
+            text-align: center;
+            margin: 0 0 25px 0;
+            font-size: 24px;
+            color: #5C4B51;
+        }
+
+
+        .toppRad {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 0 auto 14px auto;
+            padding: 10px 5px;
+            border-bottom: 1px solid rgba(92, 75, 81, 0.15);
+        }
+
+
+        .toppRad:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+
+        .toppNummer {
+            font-size: 20px;
+            font-weight: bold;
+            min-width: 30px;
+        }
+
+
+        .toppNavn {
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+
+        .toppPoeng {
+            font-size: 15px;
+            opacity: 0.7;
+        }
+
+
+        /* =========================
+           QUIZ
+           ========================= */
+
+        #spiller {
+            font-weight: bold;
+        }
+
+
+        #poengVisning {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #5C4B51;
+        }
+
+
+        #sporsmal {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 30px 0 12px 0;
+            color: #5C4B51;
+            line-height: 1.3;
+        }
+
+
+        #sporsmalTeller {
+            font-size: 16px;
+            color: #5C4B51;
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           SVARALTERNATIVER
+           ========================= */
 
         #svaralternativer {
             display: flex;
@@ -126,36 +252,41 @@
         }
 
 
-        /* SPØRSMÅL */
+        /* =========================
+           NESTE-KNAPP
+           ========================= */
 
-        #sporsmal {
-            font-size: 28px;
+        #neste {
+            display: block;
+            min-width: 150px;
+            margin: 18px auto 0 auto;
+            padding: 14px 28px;
+            background-color: #2e9d50;
+            border-color: #2e9d50;
+            color: white;
+            font-size: 19px;
             font-weight: bold;
-            margin: 30px 0;
-            color: #5C4B51;
         }
 
 
-        #sporsmalTeller {
-            font-size: 16px;
-            color: #5C4B51;
-            opacity: 0.7;
-        }
+        /* =========================
+           RESULTAT
+           ========================= */
 
-
-        /* POENG */
-
-        #poengVisning {
+        #resultat {
             font-size: 20px;
             font-weight: bold;
+            line-height: 1.5;
+            margin: 20px 0;
             color: #5C4B51;
         }
 
 
-        /* RESULTATLISTE */
+        /* =========================
+           RESULTATLISTE
+           ========================= */
 
         #resultatliste {
-            margin-top: 30px;
             width: 100%;
             text-align: center;
             color: #5C4B51;
@@ -164,7 +295,8 @@
 
         #resultatliste h3 {
             text-align: center;
-            margin-bottom: 25px;
+            margin: 0 0 25px 0;
+            font-size: 24px;
             color: #5C4B51;
         }
 
@@ -172,8 +304,17 @@
         .resultatrad {
             width: 100%;
             text-align: center;
-            margin: 0 auto 25px auto;
+            margin: 0 auto 18px auto;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(92, 75, 81, 0.15);
             color: #5C4B51;
+        }
+
+
+        .resultatrad:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
 
@@ -181,6 +322,7 @@
             display: block;
             width: 100%;
             text-align: center;
+            font-size: 19px;
             color: #5C4B51;
         }
 
@@ -192,57 +334,45 @@
             font-size: 14px;
             color: #5C4B51;
             opacity: 0.7;
-            margin-top: 4px;
+            margin-top: 5px;
         }
 
 
-        /* TOPP 5 */
+        /* =========================
+           SPILL IGJEN
+           ========================= */
 
-        #toppFem {
-            margin-top: 30px;
-            width: 100%;
-            text-align: center;
+        #svaralternativer .spillIgjen {
+            margin-top: 20px;
+            min-width: 170px;
+            padding: 13px 24px;
+            background-color: white;
             color: #5C4B51;
+            font-weight: bold;
         }
 
 
-        #toppFem h3 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #5C4B51;
-        }
-
-
-        #toppFem p {
-            width: 100%;
-            margin: 0 auto 20px auto;
-            padding: 8px 0;
-            text-align: center !important;
-            color: #5C4B51;
-        }
-
-
-        /* NESTE-KNAPP */
-
-        #neste {
-            display: block;
-            margin: 15px auto 0 auto;
-        }
-
-
-        /* MOBIL */
+        /* =========================
+           MOBIL
+           ========================= */
 
         @media (max-width: 600px) {
 
             body {
                 margin: 10px auto;
-                padding: 15px;
+                padding: 12px;
             }
 
 
             .konkurranse {
-                padding: 20px;
-                margin-top: 20px;
+                padding: 20px 15px;
+                margin-top: 15px;
+            }
+
+
+            .listeboks {
+                padding: 20px 15px;
+                margin-top: 15px;
             }
 
 
@@ -262,6 +392,33 @@
 
             #sporsmal {
                 font-size: 24px;
+                margin: 25px 0 10px 0;
+            }
+
+
+            #poengVisning {
+                font-size: 19px;
+            }
+
+
+            #toppFem h3,
+            #resultatliste h3 {
+                font-size: 22px;
+            }
+
+
+            .toppRad {
+                gap: 8px;
+            }
+
+
+            .toppNavn {
+                font-size: 18px;
+            }
+
+
+            .toppPoeng {
+                font-size: 14px;
             }
 
         }
@@ -277,7 +434,9 @@
 <body>
 
 
-    <!-- FORSIDE -->
+    <!-- =========================
+         FORSIDE
+         ========================= -->
 
     <div id="startside" class="konkurranse">
 
@@ -305,8 +464,14 @@
             Start
         </button>
 
+    </div>
 
-        <!-- TOPP 5 -->
+
+    <!-- =========================
+         TOPP 5 – EGEN BOKS
+         ========================= -->
+
+    <div class="listeboks">
 
         <div id="toppFem">
 
@@ -321,7 +486,9 @@
     </div>
 
 
-    <!-- QUIZ -->
+    <!-- =========================
+         QUIZ
+         ========================= -->
 
     <div
         id="quiz"
@@ -353,7 +520,13 @@
         <p id="resultat"></p>
 
 
-        <div id="resultatliste"></div>
+        <!-- RESULTATLISTE – EGEN BOKS -->
+
+        <div class="listeboks">
+
+            <div id="resultatliste"></div>
+
+        </div>
 
 
         <button
@@ -369,7 +542,9 @@
 
     <script>
 
-        /* VARIABLER */
+        /* =========================
+           VARIABLER
+           ========================= */
 
         let poeng = 0;
 
@@ -378,7 +553,9 @@
         let navn = "";
 
 
-        /* SUPABASE */
+        /* =========================
+           SUPABASE
+           ========================= */
 
         const supabaseUrl =
             "https://ukxevteqkihqfycqjrou.supabase.co";
@@ -395,7 +572,9 @@
             );
 
 
-        /* SPØRSMÅL */
+        /* =========================
+           SPØRSMÅL
+           ========================= */
 
         let sporsmal = [
 
@@ -456,7 +635,9 @@
         ];
 
 
-        /* STARTKNAPP */
+        /* =========================
+           STARTKNAPP
+           ========================= */
 
         document
             .getElementById("navn")
@@ -488,7 +669,9 @@
             );
 
 
-        /* START KONKURRANSE */
+        /* =========================
+           START KONKURRANSE
+           ========================= */
 
         function startKonkurranse() {
 
@@ -522,7 +705,9 @@
         }
 
 
-        /* BLAND SVAR */
+        /* =========================
+           BLAND SVAR
+           ========================= */
 
         function blandSvar(svar) {
 
@@ -533,7 +718,9 @@
         }
 
 
-        /* VIS SPØRSMÅL */
+        /* =========================
+           VIS SPØRSMÅL
+           ========================= */
 
         function visSporsmal() {
 
@@ -607,7 +794,9 @@
         }
 
 
-        /* SVAR */
+        /* =========================
+           SVAR
+           ========================= */
 
         function svar(valg, klikketKnapp) {
 
@@ -671,7 +860,9 @@
         }
 
 
-        /* NESTE SPØRSMÅL */
+        /* =========================
+           NESTE SPØRSMÅL
+           ========================= */
 
         async function nesteSporsmal() {
 
@@ -761,6 +952,10 @@
                     "🔄 Spill igjen";
 
 
+                spillIgjen.className =
+                    "spillIgjen";
+
+
                 spillIgjen.onclick =
                     function() {
 
@@ -782,7 +977,9 @@
         }
 
 
-        /* RESULTATLISTE */
+        /* =========================
+           RESULTATLISTE
+           ========================= */
 
         async function visResultatliste() {
 
@@ -875,7 +1072,9 @@
         }
 
 
-        /* TOPP 5 PÅ FORSIDEN */
+        /* =========================
+           TOPP 5 PÅ FORSIDEN
+           ========================= */
 
         async function visToppFem() {
 
@@ -927,21 +1126,75 @@
 
                     let rad =
                         document.createElement(
-                            "p"
+                            "div"
                         );
 
 
-                    rad.textContent =
-                        (index + 1) +
-                        ". " +
-                        resultat.navn +
-                        " – " +
+                    rad.className =
+                        "toppRad";
+
+
+                    let nummer =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    nummer.className =
+                        "toppNummer";
+
+
+                    nummer.textContent =
+                        (index + 1) + ".";
+
+
+                    let navnElement =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    navnElement.className =
+                        "toppNavn";
+
+
+                    navnElement.textContent =
+                        resultat.navn;
+
+
+                    let poengElement =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    poengElement.className =
+                        "toppPoeng";
+
+
+                    poengElement.textContent =
                         resultat.poeng +
                         " poeng";
 
 
-                    toppFem
-                        .appendChild(rad);
+                    rad.appendChild(
+                        nummer
+                    );
+
+
+                    rad.appendChild(
+                        navnElement
+                    );
+
+
+                    rad.appendChild(
+                        poengElement
+                    );
+
+
+                    toppFem.appendChild(
+                        rad
+                    );
 
                 }
             );
@@ -949,7 +1202,9 @@
         }
 
 
-        /* HENT TOPP 5 NÅR SIDEN ÅPNES */
+        /* =========================
+           HENT TOPP 5 NÅR SIDEN ÅPNES
+           ========================= */
 
         visToppFem();
 
