@@ -18,12 +18,6 @@
         }
 
 
-        h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-
         .konkurranse {
             border: 1px solid #ddd;
             border-radius: 16px;
@@ -57,16 +51,35 @@
         }
 
 
-        button:hover {
+        button:hover:not(:disabled) {
             transform: translateY(-1px);
         }
 
 
         button:disabled {
             cursor: not-allowed;
-            opacity: 0.4;
+            opacity: 0.5;
         }
 
+
+        /* STARTKNAPP */
+
+        #startKnapp {
+            background-color: #ccc;
+            color: white;
+            border-color: #ccc;
+        }
+
+
+        #startKnapp:not(:disabled) {
+            background-color: #2e9d50;
+            border-color: #2e9d50;
+            color: white;
+            cursor: pointer;
+        }
+
+
+        /* SVARALTERNATIVER */
 
         #svaralternativer {
             display: flex;
@@ -85,6 +98,26 @@
         }
 
 
+        /* RIKTIG SVAR */
+
+        #svaralternativer button.riktig {
+            background-color: #2e9d50;
+            color: white;
+            border-color: #2e9d50;
+        }
+
+
+        /* FEIL SVAR */
+
+        #svaralternativer button.feil {
+            background-color: #d64545;
+            color: white;
+            border-color: #d64545;
+        }
+
+
+        /* SPØRSMÅL */
+
         #sporsmal {
             font-size: 28px;
             font-weight: bold;
@@ -98,20 +131,15 @@
         }
 
 
+        /* POENG */
+
         #poengVisning {
             font-size: 20px;
             font-weight: bold;
         }
 
 
-        #resultat {
-            font-size: 20px;
-            font-weight: bold;
-            min-height: 30px;
-        }
-
-
-        /* RESULTATLISTE PÅ SLUTTEN */
+        /* RESULTATLISTE */
 
         #resultatliste {
             margin-top: 30px;
@@ -150,7 +178,7 @@
         }
 
 
-        /* TOPP 5 PÅ FORSIDEN */
+        /* TOPP 5 */
 
         #toppFem {
             margin-top: 30px;
@@ -173,6 +201,14 @@
         }
 
 
+        /* NESTE-KNAPP */
+
+        #neste {
+            display: block;
+            margin: 15px auto 0 auto;
+        }
+
+
         /* MOBIL */
 
         @media (max-width: 600px) {
@@ -180,11 +216,6 @@
             body {
                 margin: 10px auto;
                 padding: 15px;
-            }
-
-
-            h1 {
-                font-size: 32px;
             }
 
 
@@ -225,9 +256,6 @@
 <body>
 
 
-    <h1>🏆 Konkurransen</h1>
-
-
     <!-- FORSIDE -->
 
     <div id="startside" class="konkurranse">
@@ -241,6 +269,7 @@
             type="text"
             id="navn"
             placeholder="Ditt navn"
+            autocomplete="off"
         >
 
 
@@ -260,7 +289,7 @@
 
         <div id="toppFem">
 
-            <h3>🏆 Topp 5</h3>
+            <h3>Topp 5</h3>
 
             <p>
                 Laster resultater...
@@ -534,7 +563,10 @@
                     knapp.onclick =
                         function() {
 
-                            svar(alternativ);
+                            svar(
+                                alternativ,
+                                knapp
+                            );
 
                         };
 
@@ -547,12 +579,6 @@
 
 
             document
-                .getElementById("resultat")
-                .textContent =
-                    "";
-
-
-            document
                 .getElementById("neste")
                 .style.display =
                     "none";
@@ -562,20 +588,34 @@
 
         /* SVAR */
 
-        function svar(valg) {
+        function svar(valg, klikketKnapp) {
 
             let aktueltSporsmal =
                 sporsmal[sporsmalNummer];
 
 
-            let resultat =
-                document.getElementById(
-                    "resultat"
+            let knapper =
+                document.querySelectorAll(
+                    "#svaralternativer button"
                 );
 
 
+            /* DEAKTIVER ALLE SVARKNAPPER */
+
+            knapper.forEach(
+                function(knapp) {
+
+                    knapp.disabled = true;
+
+                }
+            );
+
+
+            /* VIS OM VALGET VAR RIKTIG ELLER FEIL */
+
             if (
-                valg === aktueltSporsmal.riktig
+                valg ===
+                aktueltSporsmal.riktig
             ) {
 
                 poeng++;
@@ -587,36 +627,25 @@
                         poeng;
 
 
-                resultat.textContent =
-                    "✅ Riktig svar!";
+                klikketKnapp.classList.add(
+                    "riktig"
+                );
 
             } else {
 
-                resultat.textContent =
-                    "❌ Feil svar!";
+                klikketKnapp.classList.add(
+                    "feil"
+                );
 
             }
 
 
-            let knapper =
-                document.querySelectorAll(
-                    "#svaralternativer button"
-                );
-
-
-            knapper.forEach(
-                function(knapp) {
-
-                    knapp.disabled = true;
-
-                }
-            );
-
+            /* VIS NESTE-KNAPP */
 
             document
                 .getElementById("neste")
                 .style.display =
-                    "inline-block";
+                    "block";
 
         }
 
@@ -853,7 +882,7 @@
             if (error) {
 
                 toppFem.innerHTML =
-                    "<h3>🏆 Topp 5</h3>" +
+                    "<h3>Topp 5</h3>" +
                     "<p>Kunne ikke hente resultater.</p>";
 
 
@@ -869,7 +898,7 @@
 
 
             toppFem.innerHTML =
-                "<h3>🏆 Topp 5</h3>";
+                "<h3>Topp 5</h3>";
 
 
             data.forEach(
