@@ -37,7 +37,7 @@
         }
 
 
-        /* EGNE BOKSER FOR TOPP 5 OG RESULTATLISTE */
+        /* EGNE BOKSER FOR LISTENE */
 
         .listeboks {
             border: 1px solid #5C4B51;
@@ -471,7 +471,7 @@
          TOPP 5 – EGEN BOKS
          ========================= -->
 
-    <div class="listeboks">
+    <div id="toppFemBoks" class="listeboks">
 
         <div id="toppFem">
 
@@ -517,12 +517,13 @@
         <div id="svaralternativer"></div>
 
 
-        <p id="resultat"></p>
-
-
         <!-- RESULTATLISTE – EGEN BOKS -->
 
-        <div class="listeboks">
+        <div
+            id="resultatlisteBoks"
+            class="listeboks"
+            style="display: none;"
+        >
 
             <div id="resultatliste"></div>
 
@@ -688,11 +689,23 @@
                     navn;
 
 
+            /* SKJUL FORSIDE */
+
             document
                 .getElementById("startside")
                 .style.display =
                     "none";
 
+
+            /* SKJUL TOPP 5 */
+
+            document
+                .getElementById("toppFemBoks")
+                .style.display =
+                    "none";
+
+
+            /* VIS QUIZ */
 
             document
                 .getElementById("quiz")
@@ -878,11 +891,20 @@
 
             } else {
 
+                /* VIS SLUTTRESULTAT */
+
                 document
                     .getElementById("sporsmal")
                     .textContent =
-                        "🎉 Konkurransen er ferdig!";
+                        navn +
+                        ", du fikk " +
+                        poeng +
+                        " av " +
+                        sporsmal.length +
+                        " poeng!";
 
+
+                /* FJERN SVARALTERNATIVER */
 
                 document
                     .getElementById(
@@ -892,16 +914,15 @@
                         "";
 
 
-                document
-                    .getElementById("resultat")
-                    .textContent =
-                        navn +
-                        ", du fikk " +
-                        poeng +
-                        " av " +
-                        sporsmal.length +
-                        " poeng!";
+                /* SKJUL SPØRSMÅLSTELLER */
 
+                document
+                    .getElementById("sporsmalTeller")
+                    .style.display =
+                        "none";
+
+
+                /* SKJUL NESTE */
 
                 document
                     .getElementById("neste")
@@ -929,15 +950,36 @@
 
 
                     document
-                        .getElementById("resultat")
+                        .getElementById("sporsmal")
                         .textContent +=
                             " ⚠️ Resultatet kunne ikke lagres.";
 
                 } else {
 
+                    /* VIS RESULTATLISTEN */
+
+                    document
+                        .getElementById(
+                            "resultatlisteBoks"
+                        )
+                        .style.display =
+                            "block";
+
+
                     await visResultatliste();
 
                 }
+
+
+                /* VIS TOPP 5 IGJEN */
+
+                document
+                    .getElementById("toppFemBoks")
+                    .style.display =
+                        "block";
+
+
+                await visToppFem();
 
 
                 /* SPILL IGJEN */
