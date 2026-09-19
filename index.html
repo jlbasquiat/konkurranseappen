@@ -37,7 +37,24 @@
         }
 
 
-        /* EGNE BOKSER FOR LISTENE */
+        /* =========================
+           STARTDEL
+           LIGGER DIREKTE PÅ BAKGRUNNEN
+           ========================= */
+
+        #startside {
+            border: none;
+            border-radius: 0;
+            padding: 20px;
+            margin-top: 0;
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+
+        /* =========================
+           BOKS FOR TOPP 5
+           ========================= */
 
         .listeboks {
             border: 1px solid #5C4B51;
@@ -150,12 +167,10 @@
             gap: 12px;
             margin: 0 auto 14px auto;
             padding: 10px 5px;
-            border-bottom: 1px solid rgba(92, 75, 81, 0.15);
         }
 
 
         .toppRad:last-child {
-            border-bottom: none;
             margin-bottom: 0;
         }
 
@@ -300,7 +315,18 @@
 
         /* =========================
            RESULTATLISTE
+           INGEN BOKS / INGEN STREKER
            ========================= */
+
+        #resultatlisteBoks {
+            border: none;
+            border-radius: 0;
+            padding: 10px 0 0 0;
+            margin-top: 30px;
+            background-color: transparent;
+            box-shadow: none;
+        }
+
 
         #resultatliste {
             width: 100%;
@@ -320,17 +346,15 @@
         .resultatrad {
             width: 100%;
             text-align: center;
-            margin: 0 auto 18px auto;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(92, 75, 81, 0.15);
+            margin: 0 auto 20px auto;
+            padding-bottom: 0;
+            border-bottom: none;
             color: #5C4B51;
         }
 
 
         .resultatrad:last-child {
-            border-bottom: none;
             margin-bottom: 0;
-            padding-bottom: 0;
         }
 
 
@@ -369,6 +393,11 @@
             .konkurranse {
                 padding: 20px 15px;
                 margin-top: 15px;
+            }
+
+
+            #startside {
+                padding: 15px 5px;
             }
 
 
@@ -476,7 +505,6 @@
 
     <!-- =========================
          TOPP 5
-         VISER KUN PÅ STARTSIDEN
          ========================= -->
 
     <div id="toppFemBoks" class="listeboks">
@@ -525,9 +553,7 @@
         <div id="svaralternativer"></div>
 
 
-        <!-- =========================
-             SLUTTRESULTAT
-             ========================= -->
+        <!-- SLUTTRESULTAT -->
 
         <div
             id="sluttresultat"
@@ -535,9 +561,7 @@
         ></div>
 
 
-        <!-- =========================
-             SPILL IGJEN
-             ========================= -->
+        <!-- SPILL IGJEN -->
 
         <button
             id="spillIgjen"
@@ -548,13 +572,10 @@
         </button>
 
 
-        <!-- =========================
-             RESULTATLISTE
-             ========================= -->
+        <!-- RESULTATLISTE -->
 
         <div
             id="resultatlisteBoks"
-            class="listeboks"
             style="display: none;"
         >
 
@@ -563,9 +584,7 @@
         </div>
 
 
-        <!-- =========================
-             NESTE
-             ========================= -->
+        <!-- NESTE -->
 
         <button
             id="neste"
@@ -726,23 +745,17 @@
                     navn;
 
 
-            /* SKJUL FORSIDE */
-
             document
                 .getElementById("startside")
                 .style.display =
                     "none";
 
 
-            /* SKJUL TOPP 5 */
-
             document
                 .getElementById("toppFemBoks")
                 .style.display =
                     "none";
 
-
-            /* VIS QUIZ */
 
             document
                 .getElementById("quiz")
@@ -860,8 +873,6 @@
                 );
 
 
-            /* DEAKTIVER ALLE SVARKNAPPER */
-
             knapper.forEach(
                 function(knapp) {
 
@@ -870,8 +881,6 @@
                 }
             );
 
-
-            /* VIS OM VALGET VAR RIKTIG ELLER FEIL */
 
             if (
                 valg ===
@@ -900,8 +909,6 @@
             }
 
 
-            /* VIS NESTE-KNAPP */
-
             document
                 .getElementById("neste")
                 .style.display =
@@ -928,9 +935,7 @@
 
             } else {
 
-                /* =========================
-                   KONKURRANSEN ER FERDIG
-                   ========================= */
+                /* SKJUL QUIZINNHOLD */
 
                 document
                     .getElementById("sporsmal")
