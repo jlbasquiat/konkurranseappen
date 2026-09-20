@@ -74,7 +74,6 @@
             top: 2px;
 
             margin: 0;
-
             padding: 0;
 
             border: none;
@@ -105,35 +104,13 @@
 
 
         /* =========================
-           HOVEDBOKSER
-           ========================= */
-
-        .konkurranse {
-            border: 1px solid #5C4B51;
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 25px;
-            background-color: #F2EBBF;
-            box-shadow: 0 4px 15px rgba(92, 75, 81, 0.15);
-
-            transition:
-                background-color 0.2s ease,
-                border-color 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-
-        /* =========================
            STARTDEL
            ========================= */
 
         #startside {
-            border: none;
-            border-radius: 0;
             padding: 20px;
-            margin-top: 0;
+            margin-top: 35px;
             background-color: transparent;
-            box-shadow: none;
         }
 
 
@@ -326,21 +303,41 @@
            QUIZ
            ========================= */
 
+        #quiz {
+            margin-top: 90px;
+        }
+
+
         #spiller {
             font-weight: bold;
         }
 
 
+        /* =========================
+           POENGTELLER
+           ========================= */
+
         #poengVisning {
+            position: fixed;
+
+            top: 20px;
+            left: 20px;
+
+            z-index: 999;
+
+            margin: 0;
+
             font-size: 20px;
 
             font-weight: bold;
 
-            margin: 20px 0 10px 0;
-
             color: #5C4B51;
         }
 
+
+        /* =========================
+           SPØRSMÅL
+           ========================= */
 
         #sporsmal {
             font-size: 28px;
@@ -394,8 +391,6 @@
         }
 
 
-        /* RIKTIG */
-
         #svaralternativer button.riktig {
             background-color: #2e9d50;
 
@@ -404,8 +399,6 @@
             border-color: #2e9d50;
         }
 
-
-        /* FEIL */
 
         #svaralternativer button.feil {
             background-color: #d64545;
@@ -581,8 +574,6 @@
         }
 
 
-        /* TOGGLE */
-
         body.dark-mode #darkModeToggle {
             background-color: #37474F;
 
@@ -604,31 +595,6 @@
         }
 
 
-        /* HOVEDBOKSER */
-
-        body.dark-mode .konkurranse {
-            background-color: #37474F;
-
-            border-color: #8CBEB2;
-
-            box-shadow:
-                0 4px 15px rgba(0, 0, 0, 0.35);
-        }
-
-
-        /* STARTDEL */
-
-        body.dark-mode #startside {
-            background-color: transparent;
-
-            border: none;
-
-            box-shadow: none;
-        }
-
-
-        /* TOPP 5-BOKS */
-
         body.dark-mode .listeboks {
             background-color: #37474F;
 
@@ -639,7 +605,10 @@
         }
 
 
-        /* INPUT */
+        body.dark-mode #startside {
+            background-color: transparent;
+        }
+
 
         body.dark-mode input {
             background-color: #263238;
@@ -657,8 +626,6 @@
         }
 
 
-        /* VANLIGE KNAPPER */
-
         body.dark-mode button {
             background-color: #455A64;
 
@@ -667,8 +634,6 @@
             border-color: #8CBEB2;
         }
 
-
-        /* STARTKNAPP */
 
         body.dark-mode #startKnapp {
             background-color: #455A64;
@@ -687,8 +652,6 @@
             border-color: #4F8A78;
         }
 
-
-        /* TOPP 5 */
 
         body.dark-mode #toppFem {
             color: #8CBEB2;
@@ -715,8 +678,6 @@
         }
 
 
-        /* QUIZ */
-
         body.dark-mode #poengVisning {
             color: #8CBEB2;
         }
@@ -737,8 +698,6 @@
         }
 
 
-        /* RIKTIG SVAR */
-
         body.dark-mode #svaralternativer button.riktig {
             background-color: #4F8A78;
 
@@ -747,8 +706,6 @@
             border-color: #4F8A78;
         }
 
-
-        /* FEIL SVAR */
 
         body.dark-mode #svaralternativer button.feil {
             background-color: #A94A4A;
@@ -759,8 +716,6 @@
         }
 
 
-        /* NESTE */
-
         body.dark-mode #neste {
             background-color: #4F8A78;
 
@@ -770,14 +725,10 @@
         }
 
 
-        /* SLUTTRESULTAT */
-
         body.dark-mode #sluttresultat {
             color: #8CBEB2;
         }
 
-
-        /* SPILL IGJEN */
 
         body.dark-mode #spillIgjen {
             background-color: #455A64;
@@ -787,8 +738,6 @@
             border-color: #8CBEB2;
         }
 
-
-        /* RESULTATLISTE */
 
         body.dark-mode #resultatliste {
             color: #8CBEB2;
@@ -822,7 +771,7 @@
         @media (max-width: 600px) {
 
             body {
-                margin: 10px auto;
+                margin: 0 auto;
 
                 padding: 12px;
             }
@@ -835,15 +784,24 @@
             }
 
 
-            .konkurranse {
-                padding: 20px 15px;
+            #poengVisning {
+                top: 18px;
 
-                margin-top: 15px;
+                left: 12px;
+
+                font-size: 18px;
+            }
+
+
+            #quiz {
+                margin-top: 85px;
             }
 
 
             #startside {
                 padding: 15px 5px;
+
+                margin-top: 35px;
             }
 
 
@@ -876,11 +834,6 @@
                 font-size: 24px;
 
                 margin: 25px 0 10px 0;
-            }
-
-
-            #poengVisning {
-                font-size: 19px;
             }
 
 
@@ -943,7 +896,7 @@
          FORSIDE
          ========================= -->
 
-    <div id="startside" class="konkurranse">
+    <div id="startside">
 
         <p>
             Skriv inn navnet ditt, og klikk start.
@@ -997,7 +950,6 @@
 
     <div
         id="quiz"
-        class="konkurranse"
         style="display: none;"
     >
 
@@ -1072,19 +1024,47 @@
            DARK MODE
            ========================= */
 
-        function toggleDarkMode() {
-
-            document
-                .body
-                .classList
-                .toggle("dark-mode");
-
+        function oppdaterDarkMode() {
 
             let erDarkMode =
-                document
-                    .body
-                    .classList
-                    .contains("dark-mode");
+                sessionStorage.getItem("darkMode") === "true";
+
+
+            if (erDarkMode) {
+
+                document.body.classList.add("dark-mode");
+
+            } else {
+
+                document.body.classList.remove("dark-mode");
+
+            }
+
+
+            let ikon =
+                document.getElementById("toggleIkon");
+
+
+            ikon.textContent =
+                erDarkMode
+                    ? "🌙"
+                    : "☀️";
+
+        }
+
+
+        function toggleDarkMode() {
+
+            let erDarkMode =
+                document.body.classList.toggle(
+                    "dark-mode"
+                );
+
+
+            sessionStorage.setItem(
+                "darkMode",
+                erDarkMode
+            );
 
 
             let ikon =
@@ -1093,17 +1073,18 @@
                 );
 
 
-            if (erDarkMode) {
-
-                ikon.textContent = "🌙";
-
-            } else {
-
-                ikon.textContent = "☀️";
-
-            }
+            ikon.textContent =
+                erDarkMode
+                    ? "🌙"
+                    : "☀️";
 
         }
+
+
+        /* ÅPNE ALLTID I LYS MODUS
+           PÅ NY NETTLESERØKT */
+
+        oppdaterDarkMode();
 
 
         /* =========================
@@ -1280,6 +1261,14 @@
 
             document
                 .getElementById("quiz")
+                .style.display =
+                    "block";
+
+
+            /* POENGTELLER VISES NÅ */
+
+            document
+                .getElementById("poengVisning")
                 .style.display =
                     "block";
 
