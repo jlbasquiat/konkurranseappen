@@ -9,7 +9,7 @@
     <style>
 
         /* =========================
-           GRUNNLEGGENDE
+           VANLIG MODUS
            ========================= */
 
         body {
@@ -20,6 +20,87 @@
             text-align: center;
             background-color: #F3B562;
             color: #5C4B51;
+            transition:
+                background-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+
+        /* =========================
+           DARK MODE TOGGLE
+           ========================= */
+
+        #darkModeToggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 64px;
+            height: 34px;
+
+            margin: 0;
+            padding: 0;
+
+            border: 2px solid #5C4B51;
+            border-radius: 20px;
+
+            background-color: #F2EBBF;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        #darkModeToggle:hover {
+            transform: none;
+        }
+
+
+        #toggleKnapp {
+            position: absolute;
+
+            width: 26px;
+            height: 26px;
+
+            left: 3px;
+            top: 2px;
+
+            margin: 0;
+
+            padding: 0;
+
+            border: none;
+            border-radius: 50%;
+
+            background-color: #F3B562;
+
+            pointer-events: none;
+
+            transition:
+                left 0.2s ease,
+                background-color 0.2s ease;
+        }
+
+
+        #toggleIkon {
+            position: absolute;
+
+            top: 50%;
+            right: 6px;
+
+            transform: translateY(-50%);
+
+            font-size: 15px;
+
+            pointer-events: none;
         }
 
 
@@ -34,12 +115,16 @@
             margin-top: 25px;
             background-color: #F2EBBF;
             box-shadow: 0 4px 15px rgba(92, 75, 81, 0.15);
+
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
 
         /* =========================
            STARTDEL
-           LIGGER DIREKTE PÅ BAKGRUNNEN
            ========================= */
 
         #startside {
@@ -53,7 +138,7 @@
 
 
         /* =========================
-           BOKS FOR TOPP 5
+           TOPP 5-BOKS
            ========================= */
 
         .listeboks {
@@ -63,6 +148,11 @@
             margin-top: 20px;
             background-color: #F2EBBF;
             box-shadow: 0 4px 15px rgba(92, 75, 81, 0.15);
+
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
 
@@ -75,12 +165,21 @@
             font-size: 18px;
             width: 250px;
             margin: 10px;
+
             border: 1px solid #5C4B51;
             border-radius: 8px;
+
             box-sizing: border-box;
+
             text-align: center;
+
             color: #5C4B51;
             background-color: white;
+
+            transition:
+                background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
         }
 
 
@@ -96,14 +195,24 @@
 
         button {
             padding: 12px 24px;
+
             font-size: 18px;
+
             cursor: pointer;
+
             margin: 5px;
+
             border: 1px solid #5C4B51;
             border-radius: 8px;
+
             background-color: white;
             color: #5C4B51;
-            transition: transform 0.15s ease;
+
+            transition:
+                transform 0.15s ease,
+                background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
         }
 
 
@@ -124,10 +233,15 @@
 
         #startKnapp {
             min-width: 150px;
+
             padding: 14px 28px;
+
             background-color: #ccc;
+
             color: white;
+
             border-color: #ccc;
+
             font-size: 19px;
             font-weight: bold;
         }
@@ -136,7 +250,9 @@
         #startKnapp:not(:disabled) {
             background-color: #2e9d50;
             border-color: #2e9d50;
+
             color: white;
+
             cursor: pointer;
         }
 
@@ -154,18 +270,26 @@
 
         #toppFem h3 {
             text-align: center;
+
             margin: 0 0 25px 0;
+
             font-size: 24px;
+
             color: #5C4B51;
         }
 
 
         .toppRad {
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 12px;
+
             margin: 0 auto 14px auto;
+
             padding: 10px 5px;
         }
 
@@ -177,19 +301,23 @@
 
         .toppNummer {
             font-size: 20px;
+
             font-weight: bold;
+
             min-width: 30px;
         }
 
 
         .toppNavn {
             font-size: 19px;
+
             font-weight: bold;
         }
 
 
         .toppPoeng {
             font-size: 15px;
+
             opacity: 0.7;
         }
 
@@ -205,25 +333,35 @@
 
         #poengVisning {
             font-size: 20px;
+
             font-weight: bold;
+
             margin: 20px 0 10px 0;
+
             color: #5C4B51;
         }
 
 
         #sporsmal {
             font-size: 28px;
+
             font-weight: bold;
+
             margin: 30px 0 12px 0;
+
             color: #5C4B51;
+
             line-height: 1.3;
         }
 
 
         #sporsmalTeller {
             font-size: 16px;
+
             color: #5C4B51;
+
             opacity: 0.7;
+
             margin-bottom: 20px;
         }
 
@@ -234,52 +372,71 @@
 
         #svaralternativer {
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             gap: 8px;
+
             margin-top: 20px;
         }
 
 
         #svaralternativer button {
             width: 280px;
+
             min-height: 55px;
+
             font-size: 20px;
+
             border-radius: 10px;
         }
 
 
-        /* RIKTIG SVAR */
+        /* RIKTIG */
 
         #svaralternativer button.riktig {
             background-color: #2e9d50;
+
             color: white;
+
             border-color: #2e9d50;
         }
 
 
-        /* FEIL SVAR */
+        /* FEIL */
 
         #svaralternativer button.feil {
             background-color: #d64545;
+
             color: white;
+
             border-color: #d64545;
         }
 
 
         /* =========================
-           NESTE-KNAPP
+           NESTE
            ========================= */
 
         #neste {
             display: block;
+
             min-width: 150px;
+
             margin: 18px auto 0 auto;
+
             padding: 14px 28px;
+
             background-color: #2e9d50;
+
             border-color: #2e9d50;
+
             color: white;
+
             font-size: 19px;
+
             font-weight: bold;
         }
 
@@ -290,9 +447,13 @@
 
         #sluttresultat {
             font-size: 24px;
+
             font-weight: bold;
+
             line-height: 1.5;
+
             margin: 30px 0 20px 0;
+
             color: #5C4B51;
         }
 
@@ -303,52 +464,73 @@
 
         #spillIgjen {
             display: block;
+
             min-width: 170px;
+
             margin: 0 auto;
+
             padding: 13px 24px;
+
             background-color: white;
+
             color: #5C4B51;
+
             font-size: 18px;
+
             font-weight: bold;
         }
 
 
         /* =========================
            RESULTATLISTE
-           INGEN BOKS / INGEN STREKER
            ========================= */
 
         #resultatlisteBoks {
             border: none;
+
             border-radius: 0;
+
             padding: 10px 0 0 0;
+
             margin-top: 30px;
+
             background-color: transparent;
+
             box-shadow: none;
         }
 
 
         #resultatliste {
             width: 100%;
+
             text-align: center;
+
             color: #5C4B51;
         }
 
 
         #resultatliste h3 {
             text-align: center;
+
             margin: 0 0 25px 0;
+
             font-size: 24px;
+
             color: #5C4B51;
         }
 
 
         .resultatrad {
             width: 100%;
+
             text-align: center;
+
             margin: 0 auto 20px auto;
+
             padding-bottom: 0;
+
             border-bottom: none;
+
             color: #5C4B51;
         }
 
@@ -360,21 +542,276 @@
 
         .resultatrad strong {
             display: block;
+
             width: 100%;
+
             text-align: center;
+
             font-size: 19px;
+
             color: #5C4B51;
         }
 
 
         .resultatdato {
             display: block;
+
             width: 100%;
+
             text-align: center;
+
             font-size: 14px;
+
             color: #5C4B51;
+
             opacity: 0.7;
+
             margin-top: 5px;
+        }
+
+
+        /* =====================================================
+           DARK MODE
+           ===================================================== */
+
+        body.dark-mode {
+            background-color: #263238;
+
+            color: #8CBEB2;
+        }
+
+
+        /* TOGGLE */
+
+        body.dark-mode #darkModeToggle {
+            background-color: #37474F;
+
+            border-color: #8CBEB2;
+        }
+
+
+        body.dark-mode #toggleKnapp {
+            left: 33px;
+
+            background-color: #8CBEB2;
+        }
+
+
+        body.dark-mode #toggleIkon {
+            left: 7px;
+
+            right: auto;
+        }
+
+
+        /* HOVEDBOKSER */
+
+        body.dark-mode .konkurranse {
+            background-color: #37474F;
+
+            border-color: #8CBEB2;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* STARTDEL */
+
+        body.dark-mode #startside {
+            background-color: transparent;
+
+            border: none;
+
+            box-shadow: none;
+        }
+
+
+        /* TOPP 5-BOKS */
+
+        body.dark-mode .listeboks {
+            background-color: #37474F;
+
+            border-color: #8CBEB2;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* INPUT */
+
+        body.dark-mode input {
+            background-color: #263238;
+
+            color: #8CBEB2;
+
+            border-color: #8CBEB2;
+        }
+
+
+        body.dark-mode input::placeholder {
+            color: #8CBEB2;
+
+            opacity: 0.7;
+        }
+
+
+        /* VANLIGE KNAPPER */
+
+        body.dark-mode button {
+            background-color: #455A64;
+
+            color: #8CBEB2;
+
+            border-color: #8CBEB2;
+        }
+
+
+        /* STARTKNAPP */
+
+        body.dark-mode #startKnapp {
+            background-color: #455A64;
+
+            color: #8CBEB2;
+
+            border-color: #455A64;
+        }
+
+
+        body.dark-mode #startKnapp:not(:disabled) {
+            background-color: #4F8A78;
+
+            color: #F2EBBF;
+
+            border-color: #4F8A78;
+        }
+
+
+        /* TOPP 5 */
+
+        body.dark-mode #toppFem {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode #toppFem h3 {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .toppNummer {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .toppNavn {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .toppPoeng {
+            color: #8CBEB2;
+        }
+
+
+        /* QUIZ */
+
+        body.dark-mode #poengVisning {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode #sporsmal {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode #sporsmalTeller {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode #spiller {
+            color: #8CBEB2;
+        }
+
+
+        /* RIKTIG SVAR */
+
+        body.dark-mode #svaralternativer button.riktig {
+            background-color: #4F8A78;
+
+            color: #F2EBBF;
+
+            border-color: #4F8A78;
+        }
+
+
+        /* FEIL SVAR */
+
+        body.dark-mode #svaralternativer button.feil {
+            background-color: #A94A4A;
+
+            color: #F2EBBF;
+
+            border-color: #A94A4A;
+        }
+
+
+        /* NESTE */
+
+        body.dark-mode #neste {
+            background-color: #4F8A78;
+
+            color: #F2EBBF;
+
+            border-color: #4F8A78;
+        }
+
+
+        /* SLUTTRESULTAT */
+
+        body.dark-mode #sluttresultat {
+            color: #8CBEB2;
+        }
+
+
+        /* SPILL IGJEN */
+
+        body.dark-mode #spillIgjen {
+            background-color: #455A64;
+
+            color: #8CBEB2;
+
+            border-color: #8CBEB2;
+        }
+
+
+        /* RESULTATLISTE */
+
+        body.dark-mode #resultatliste {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode #resultatliste h3 {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .resultatrad {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .resultatrad strong {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .resultatdato {
+            color: #8CBEB2;
         }
 
 
@@ -386,12 +823,21 @@
 
             body {
                 margin: 10px auto;
+
                 padding: 12px;
+            }
+
+
+            #darkModeToggle {
+                top: 12px;
+
+                right: 12px;
             }
 
 
             .konkurranse {
                 padding: 20px 15px;
+
                 margin-top: 15px;
             }
 
@@ -403,26 +849,32 @@
 
             .listeboks {
                 padding: 20px 15px;
+
                 margin-top: 15px;
             }
 
 
             input {
                 width: 80%;
+
                 max-width: 300px;
+
                 text-align: center;
             }
 
 
             #svaralternativer button {
                 width: 100%;
+
                 max-width: 320px;
+
                 min-height: 60px;
             }
 
 
             #sporsmal {
                 font-size: 24px;
+
                 margin: 25px 0 10px 0;
             }
 
@@ -468,6 +920,23 @@
 
 
 <body>
+
+
+    <!-- =========================
+         DARK MODE TOGGLE
+         ========================= -->
+
+    <button
+        id="darkModeToggle"
+        onclick="toggleDarkMode()"
+        aria-label="Bytt mellom lys og mørk modus"
+    >
+
+        <span id="toggleKnapp"></span>
+
+        <span id="toggleIkon">☀️</span>
+
+    </button>
 
 
     <!-- =========================
@@ -600,6 +1069,44 @@
     <script>
 
         /* =========================
+           DARK MODE
+           ========================= */
+
+        function toggleDarkMode() {
+
+            document
+                .body
+                .classList
+                .toggle("dark-mode");
+
+
+            let erDarkMode =
+                document
+                    .body
+                    .classList
+                    .contains("dark-mode");
+
+
+            let ikon =
+                document.getElementById(
+                    "toggleIkon"
+                );
+
+
+            if (erDarkMode) {
+
+                ikon.textContent = "🌙";
+
+            } else {
+
+                ikon.textContent = "☀️";
+
+            }
+
+        }
+
+
+        /* =========================
            VARIABLER
            ========================= */
 
@@ -637,55 +1144,65 @@
 
             {
                 tekst: "Hva er hovedstaden i Norge?",
+
                 svar: [
                     "Oslo",
                     "Bergen",
                     "Trondheim"
                 ],
+
                 riktig: "Oslo"
             },
 
 
             {
                 tekst: "Hvilken planet er nærmest solen?",
+
                 svar: [
                     "Jorden",
                     "Merkur",
                     "Mars"
                 ],
+
                 riktig: "Merkur"
             },
 
 
             {
                 tekst: "Hvor mange dager er det i en uke?",
+
                 svar: [
                     "5",
                     "7",
                     "10"
                 ],
+
                 riktig: "7"
             },
 
 
             {
                 tekst: "Hvilket dyr er kjent som menneskets beste venn?",
+
                 svar: [
                     "Katt",
                     "Hund",
                     "Hest"
                 ],
+
                 riktig: "Hund"
             },
 
 
             {
                 tekst: "Hva heter Norges lengste elv?",
+
                 svar: [
                     "Glomma",
                     "Drammenselva",
                     "Lågen"
                 ],
+
                 riktig: "Glomma"
             }
 
@@ -703,11 +1220,15 @@
                 function() {
 
                     let navnInput =
-                        document.getElementById("navn");
+                        document.getElementById(
+                            "navn"
+                        );
 
 
                     let startKnapp =
-                        document.getElementById("startKnapp");
+                        document.getElementById(
+                            "startKnapp"
+                        );
 
 
                     if (
@@ -861,7 +1382,10 @@
            SVAR
            ========================= */
 
-        function svar(valg, klikketKnapp) {
+        function svar(
+            valg,
+            klikketKnapp
+        ) {
 
             let aktueltSporsmal =
                 sporsmal[sporsmalNummer];
