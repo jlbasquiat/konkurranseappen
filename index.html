@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Har vi det gøy nå?</title>
+    <title>Quizz</title>
 
     <style>
 
@@ -318,7 +318,7 @@
 
 
         /* =========================
-           TOPP 5
+           TOPPRESULTATER
            ========================= */
 
         #toppFemBoks {
@@ -350,28 +350,97 @@
         #toppFem h3 {
             text-align: center;
 
-            margin: 0 0 18px;
+            margin: 0 0 15px;
 
-            font-size: 18px;
+            font-size: 19px;
 
             font-weight: normal;
 
             color: #354F52;
 
-            opacity: 0.75;
+            opacity: 0.8;
         }
 
+
+        /* =========================
+           TOPP-BRYTER
+           ========================= */
+
+        #topplisteBryter {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+
+            gap: 0;
+
+            border: 1px solid #52706B;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            width: fit-content;
+
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        .periodeKnapp {
+            border: none;
+
+            border-radius: 0;
+
+            margin: 0;
+
+            padding: 7px 18px;
+
+            font-size: 14px;
+
+            background-color: transparent;
+
+            color: #354F52;
+
+            opacity: 0.65;
+
+            box-shadow: none;
+        }
+
+
+        .periodeKnapp:hover {
+            transform: none;
+
+            background-color: transparent;
+        }
+
+
+        .periodeKnapp.aktiv {
+            background-color: #52706B;
+
+            color: white;
+
+            opacity: 1;
+        }
+
+
+        /* =========================
+           TOPP 3-RADER
+           ========================= */
 
         .toppRad {
             display: grid;
 
-            grid-template-columns: 30px 180px 70px;
+            grid-template-columns: 40px 180px 70px;
 
             align-items: center;
 
-            width: 280px;
+            width: 290px;
 
-            margin: 0 auto 8px;
+            margin: 0 auto 9px;
 
             padding: 5px 0;
         }
@@ -385,11 +454,9 @@
         .toppNummer {
             text-align: left;
 
-            font-size: 15px;
+            font-size: 22px;
 
-            font-weight: normal;
-
-            opacity: 0.7;
+            line-height: 1;
         }
 
 
@@ -415,7 +482,16 @@
 
             font-size: 13px;
 
-            opacity: 0.6;
+            opacity: 0.65;
+        }
+
+
+        #ingenResultater {
+            font-size: 14px;
+
+            opacity: 0.65;
+
+            margin: 15px 0;
         }
 
 
@@ -793,9 +869,31 @@
         }
 
 
+        body.dark-mode #topplisteBryter {
+            border-color: #8CBEB2;
+        }
+
+
+        body.dark-mode .periodeKnapp {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .periodeKnapp.aktiv {
+            background-color: #8CBEB2;
+
+            color: #263238;
+        }
+
+
         body.dark-mode .toppNummer,
         body.dark-mode .toppNavn,
         body.dark-mode .toppPoeng {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode #ingenResultater {
             color: #8CBEB2;
         }
 
@@ -1003,12 +1101,24 @@
             }
 
 
+            #topplisteBryter {
+                margin-bottom: 15px;
+            }
+
+
+            .periodeKnapp {
+                padding: 7px 15px;
+
+                font-size: 13px;
+            }
+
+
             .toppRad {
-                grid-template-columns: 30px 1fr 70px;
+                grid-template-columns: 40px 1fr 70px;
 
                 width: 100%;
 
-                max-width: 280px;
+                max-width: 290px;
             }
 
 
@@ -1161,7 +1271,7 @@
 
 
     <!-- =========================
-         TOPP 5
+         TOPPRESULTATER
          ========================= -->
 
     <div
@@ -1171,11 +1281,38 @@
 
         <div id="toppFem">
 
-            <h3>Topp 5</h3>
+            <h3>Toppresultater</h3>
 
-            <p>
-                Laster resultater...
-            </p>
+
+            <div id="topplisteBryter">
+
+                <button
+                    id="iDagKnapp"
+                    class="periodeKnapp aktiv"
+                    onclick="visToppresultater('iDag')"
+                >
+                    I dag
+                </button>
+
+
+                <button
+                    id="allTimeKnapp"
+                    class="periodeKnapp"
+                    onclick="visToppresultater('allTime')"
+                >
+                    All time
+                </button>
+
+            </div>
+
+
+            <div id="topplisteInnhold">
+
+                <p id="ingenResultater">
+                    Laster resultater...
+                </p>
+
+            </div>
 
         </div>
 
@@ -1702,8 +1839,6 @@
                     "none";
 
 
-            /* LUKK AVBRYT-MENYEN */
-
             document
                 .getElementById("avbrytValg")
                 .style.display =
@@ -1838,15 +1973,11 @@
 
         async function avsluttKonkurranse() {
 
-            /* SKJUL HEADER */
-
             document
                 .getElementById("spillHeader")
                 .style.display =
                     "none";
 
-
-            /* SKJUL SPØRSMÅL */
 
             document
                 .getElementById("sporsmal")
@@ -1860,8 +1991,6 @@
                     "none";
 
 
-            /* FJERN SVARALTERNATIVER */
-
             document
                 .getElementById(
                     "svaralternativer"
@@ -1870,23 +1999,17 @@
                     "";
 
 
-            /* SKJUL NESTE */
-
             document
                 .getElementById("neste")
                 .style.display =
                     "none";
 
 
-            /* SKJUL AVBRYT-OMRÅDE */
-
             document
                 .getElementById("avbrytOmrade")
                 .style.display =
                     "none";
 
-
-            /* VIS RESULTAT */
 
             let sluttresultat =
                 document.getElementById(
@@ -1907,15 +2030,11 @@
                 "block";
 
 
-            /* VIS SPILL IGJEN */
-
             document
                 .getElementById("spillIgjen")
                 .style.display =
                     "block";
 
-
-            /* LAGRE RESULTAT */
 
             let { error } =
                 await supabaseClient
@@ -1934,8 +2053,6 @@
                 );
 
             } else {
-
-                /* VIS RESULTATLISTE */
 
                 document
                     .getElementById(
@@ -2118,41 +2235,183 @@
 
 
         /* =========================
-           TOPP 5
+           TOPPRESULTATER
            ========================= */
 
-        async function visToppFem() {
-
-            let { data, error } =
-                await supabaseClient
-                    .from("Resultater")
-                    .select(
-                        "navn, poeng"
-                    )
-                    .order(
-                        "poeng",
-                        {
-                            ascending: false
-                        }
-                    )
-                    .limit(5);
-
+        async function visToppresultater(
+            periode
+        ) {
 
             let toppFem =
                 document.getElementById(
-                    "toppFem"
+                    "topplisteInnhold"
                 );
 
+
+            let iDagKnapp =
+                document.getElementById(
+                    "iDagKnapp"
+                );
+
+
+            let allTimeKnapp =
+                document.getElementById(
+                    "allTimeKnapp"
+                );
+
+
+            /* OPPDATER AKTIV KNAPP */
+
+            iDagKnapp.classList.remove(
+                "aktiv"
+            );
+
+
+            allTimeKnapp.classList.remove(
+                "aktiv"
+            );
+
+
+            if (periode === "iDag") {
+
+                iDagKnapp.classList.add(
+                    "aktiv"
+                );
+
+            } else {
+
+                allTimeKnapp.classList.add(
+                    "aktiv"
+                );
+
+            }
+
+
+            /* VIS LASTING */
+
+            toppFem.innerHTML =
+                "<p id='ingenResultater'>Laster resultater...</p>";
+
+
+            let data;
+
+            let error;
+
+
+            /* =========================
+               ALL TIME
+               ========================= */
+
+            if (
+                periode === "allTime"
+            ) {
+
+                let resultat =
+                    await supabaseClient
+                        .from("Resultater")
+                        .select(
+                            "navn, poeng, created_at"
+                        )
+                        .order(
+                            "poeng",
+                            {
+                                ascending: false
+                            }
+                        )
+                        .order(
+                            "created_at",
+                            {
+                                ascending: true
+                            }
+                        )
+                        .limit(3);
+
+
+                data =
+                    resultat.data;
+
+                error =
+                    resultat.error;
+
+            }
+
+
+            /* =========================
+               I DAG
+               ========================= */
+
+            else {
+
+                let na =
+                    new Date();
+
+
+                let start =
+                    new Date(
+                        na.getFullYear(),
+                        na.getMonth(),
+                        na.getDate()
+                    );
+
+
+                let slutt =
+                    new Date(
+                        na.getFullYear(),
+                        na.getMonth(),
+                        na.getDate() + 1
+                    );
+
+
+                let resultat =
+                    await supabaseClient
+                        .from("Resultater")
+                        .select(
+                            "navn, poeng, created_at"
+                        )
+                        .gte(
+                            "created_at",
+                            start.toISOString()
+                        )
+                        .lt(
+                            "created_at",
+                            slutt.toISOString()
+                        )
+                        .order(
+                            "poeng",
+                            {
+                                ascending: false
+                            }
+                        )
+                        .order(
+                            "created_at",
+                            {
+                                ascending: true
+                            }
+                        )
+                        .limit(3);
+
+
+                data =
+                    resultat.data;
+
+                error =
+                    resultat.error;
+
+            }
+
+
+            /* =========================
+               FEIL
+               ========================= */
 
             if (error) {
 
                 toppFem.innerHTML =
-                    "<h3>Topp 5</h3>" +
-                    "<p>Kunne ikke hente resultater.</p>";
+                    "<p id='ingenResultater'>Kunne ikke hente resultater.</p>";
 
 
                 console.error(
-                    "Feil ved henting av topp 5:",
+                    "Feil ved henting av toppliste:",
                     error
                 );
 
@@ -2162,9 +2421,44 @@
             }
 
 
-            toppFem.innerHTML =
-                "<h3>Topp 5</h3>";
+            /* =========================
+               INGEN RESULTATER
+               ========================= */
 
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                toppFem.innerHTML =
+                    "<p id='ingenResultater'>" +
+                    (
+                        periode === "iDag"
+                            ? "Ingen resultater i dag ennå."
+                            : "Ingen resultater ennå."
+                    ) +
+                    "</p>";
+
+
+                return;
+
+            }
+
+
+            /* =========================
+               EMOJIER
+               ========================= */
+
+            let medaljer = [
+                "🥇",
+                "🥈",
+                "🥉"
+            ];
+
+
+            /* =========================
+               LAG TOPP 3
+               ========================= */
 
             data.forEach(
                 function(resultat, index) {
@@ -2179,18 +2473,18 @@
                         "toppRad";
 
 
-                    let nummer =
+                    let plassering =
                         document.createElement(
                             "span"
                         );
 
 
-                    nummer.className =
+                    plassering.className =
                         "toppNummer";
 
 
-                    nummer.textContent =
-                        (index + 1) + ".";
+                    plassering.textContent =
+                        medaljer[index];
 
 
                     let navnElement =
@@ -2223,7 +2517,7 @@
 
 
                     rad.appendChild(
-                        nummer
+                        plassering
                     );
 
 
@@ -2248,10 +2542,10 @@
 
 
         /* =========================
-           HENT TOPP 5 VED OPPSTART
+           START MED "I DAG"
            ========================= */
 
-        visToppFem();
+        visToppresultater("iDag");
 
     </script>
 
