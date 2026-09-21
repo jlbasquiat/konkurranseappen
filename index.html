@@ -257,17 +257,17 @@
 
 
         .toppRad {
-            display: flex;
+            display: grid;
+
+            grid-template-columns: 40px 220px 90px;
 
             align-items: center;
 
-            justify-content: center;
-
-            gap: 12px;
+            width: 350px;
 
             margin: 0 auto 14px auto;
 
-            padding: 10px 5px;
+            padding: 10px 0;
         }
 
 
@@ -277,22 +277,34 @@
 
 
         .toppNummer {
+            text-align: left;
+
             font-size: 20px;
 
             font-weight: bold;
-
-            min-width: 30px;
         }
 
 
         .toppNavn {
+            width: 220px;
+
+            text-align: center;
+
             font-size: 19px;
 
             font-weight: bold;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
         }
 
 
         .toppPoeng {
+            text-align: right;
+
             font-size: 15px;
 
             opacity: 0.7;
@@ -514,15 +526,15 @@
 
 
         .resultatrad {
-            width: 100%;
+            display: grid;
 
-            text-align: center;
+            grid-template-columns: 40px 220px 90px;
+
+            align-items: center;
+
+            width: 350px;
 
             margin: 0 auto 20px auto;
-
-            padding-bottom: 0;
-
-            border-bottom: none;
 
             color: #5C4B51;
         }
@@ -533,33 +545,38 @@
         }
 
 
-        .resultatrad strong {
-            display: block;
+        .resultatPlassering {
+            text-align: left;
 
-            width: 100%;
+            font-size: 19px;
+
+            font-weight: bold;
+        }
+
+
+        .resultatNavn {
+            width: 220px;
 
             text-align: center;
 
             font-size: 19px;
 
-            color: #5C4B51;
+            font-weight: bold;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
         }
 
 
-        .resultatdato {
-            display: block;
-
-            width: 100%;
-
-            text-align: center;
+        .resultatPoeng {
+            text-align: right;
 
             font-size: 14px;
 
-            color: #5C4B51;
-
             opacity: 0.7;
-
-            margin-top: 5px;
         }
 
 
@@ -653,46 +670,14 @@
         }
 
 
-        body.dark-mode #toppFem {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #toppFem h3 {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .toppNummer {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .toppNavn {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .toppPoeng {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #poengVisning {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #sporsmal {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #sporsmalTeller {
-            color: #8CBEB2;
-        }
-
-
+        body.dark-mode #toppFem,
+        body.dark-mode #toppFem h3,
+        body.dark-mode .toppNummer,
+        body.dark-mode .toppNavn,
+        body.dark-mode .toppPoeng,
+        body.dark-mode #poengVisning,
+        body.dark-mode #sporsmal,
+        body.dark-mode #sporsmalTeller,
         body.dark-mode #spiller {
             color: #8CBEB2;
         }
@@ -739,27 +724,12 @@
         }
 
 
-        body.dark-mode #resultatliste {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #resultatliste h3 {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .resultatrad {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .resultatrad strong {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .resultatdato {
+        body.dark-mode #resultatliste,
+        body.dark-mode #resultatliste h3,
+        body.dark-mode .resultatrad,
+        body.dark-mode .resultatPlassering,
+        body.dark-mode .resultatNavn,
+        body.dark-mode .resultatPoeng {
             color: #8CBEB2;
         }
 
@@ -843,8 +813,19 @@
             }
 
 
-            .toppRad {
-                gap: 8px;
+            .toppRad,
+            .resultatrad {
+                grid-template-columns: 35px 1fr 75px;
+
+                width: 100%;
+
+                max-width: 350px;
+            }
+
+
+            .toppNavn,
+            .resultatNavn {
+                width: 100%;
             }
 
 
@@ -908,6 +889,7 @@
             id="navn"
             placeholder="Ditt navn"
             autocomplete="off"
+            maxlength="20"
         >
 
 
@@ -1081,9 +1063,6 @@
         }
 
 
-        /* ÅPNE ALLTID I LYS MODUS
-           PÅ NY NETTLESERØKT */
-
         oppdaterDarkMode();
 
 
@@ -1191,6 +1170,53 @@
 
 
         /* =========================
+           NAVNEVALIDERING
+           ========================= */
+
+        function gyldigNavn(navnInput) {
+
+            let navnUtenStartOgSlutt =
+                navnInput.trim();
+
+
+            /* MAKS 20 TEGN TOTALT */
+
+            if (
+                navnUtenStartOgSlutt.length > 20
+            ) {
+
+                return false;
+
+            }
+
+
+            /* MAKS 10 TEGN UTEN MELLOMROM */
+
+            let deler =
+                navnUtenStartOgSlutt.split(/\s+/);
+
+
+            for (
+                let del of deler
+            ) {
+
+                if (del.length > 10) {
+
+                    return false;
+
+                }
+
+            }
+
+
+            return (
+                navnUtenStartOgSlutt.length > 0
+            );
+
+        }
+
+
+        /* =========================
            STARTKNAPP
            ========================= */
 
@@ -1212,17 +1238,10 @@
                         );
 
 
-                    if (
-                        navnInput.value.trim() === ""
-                    ) {
-
-                        startKnapp.disabled = true;
-
-                    } else {
-
-                        startKnapp.disabled = false;
-
-                    }
+                    startKnapp.disabled =
+                        !gyldigNavn(
+                            navnInput.value
+                        );
 
                 }
             );
@@ -1234,11 +1253,24 @@
 
         function startKonkurranse() {
 
-            navn =
+            let navnInput =
                 document
                     .getElementById("navn")
                     .value
                     .trim();
+
+
+            if (
+                !gyldigNavn(navnInput)
+            ) {
+
+                return;
+
+            }
+
+
+            navn =
+                navnInput;
 
 
             document
@@ -1264,8 +1296,6 @@
                 .style.display =
                     "block";
 
-
-            /* POENGTELLER VISES NÅ */
 
             document
                 .getElementById("poengVisning")
@@ -1448,8 +1478,6 @@
 
             } else {
 
-                /* SKJUL QUIZINNHOLD */
-
                 document
                     .getElementById("sporsmal")
                     .style.display =
@@ -1482,8 +1510,6 @@
                         "none";
 
 
-                /* VIS RESULTAT */
-
                 let sluttresultat =
                     document.getElementById(
                         "sluttresultat"
@@ -1503,15 +1529,11 @@
                     "block";
 
 
-                /* VIS SPILL IGJEN */
-
                 document
                     .getElementById("spillIgjen")
                     .style.display =
                         "block";
 
-
-                /* LAGRE RESULTAT */
 
                 let { error } =
                     await supabaseClient
@@ -1530,8 +1552,6 @@
                     );
 
                 } else {
-
-                    /* VIS RESULTATLISTE */
 
                     document
                         .getElementById(
@@ -1598,7 +1618,7 @@
 
 
             data.forEach(
-                function(resultat) {
+                function(resultat, index) {
 
                     let rad =
                         document.createElement(
@@ -1608,6 +1628,44 @@
 
                     rad.className =
                         "resultatrad";
+
+
+                    let plassering =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    plassering.className =
+                        "resultatPlassering";
+
+
+                    plassering.textContent =
+                        (index + 1) + ".";
+
+
+                    let navnElement =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    navnElement.className =
+                        "resultatNavn";
+
+
+                    navnElement.textContent =
+                        resultat.navn;
+
+
+                    let poengElement =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    poengElement.className =
+                        "resultatPoeng";
 
 
                     let dato =
@@ -1622,18 +1680,25 @@
                         );
 
 
-                    rad.innerHTML =
-                        "<strong>" +
-                        resultat.navn +
-                        "</strong>" +
-
-                        '<div class="resultatdato">' +
-
+                    poengElement.textContent =
                         resultat.poeng +
                         "p, " +
-                        datoFormatert +
+                        datoFormatert;
 
-                        "</div>";
+
+                    rad.appendChild(
+                        plassering
+                    );
+
+
+                    rad.appendChild(
+                        navnElement
+                    );
+
+
+                    rad.appendChild(
+                        poengElement
+                    );
 
 
                     resultatliste
