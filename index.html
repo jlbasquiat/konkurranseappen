@@ -27,16 +27,84 @@
 
 
         /* =========================
+           HEADER UNDER SPILLET
+           ========================= */
+
+        #spillHeader {
+            position: fixed;
+
+            top: 20px;
+            left: 20px;
+            right: 20px;
+
+            z-index: 1000;
+
+            display: grid;
+
+            grid-template-columns: 1fr 2fr 1fr;
+
+            align-items: center;
+
+            pointer-events: none;
+        }
+
+
+        #poengVisning {
+            justify-self: start;
+
+            margin: 0;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            color: #354F52;
+
+            text-align: left;
+
+            pointer-events: none;
+        }
+
+
+        #spiller {
+            justify-self: center;
+
+            width: 100%;
+
+            max-width: 300px;
+
+            margin: 0;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            line-height: 1.15;
+
+            color: #354F52;
+
+            text-align: center;
+
+            overflow-wrap: break-word;
+
+            word-break: normal;
+        }
+
+
+        /* =========================
            DARK MODE TOGGLE
            ========================= */
 
         #darkModeToggle {
             position: fixed;
+
             top: 20px;
             right: 20px;
-            z-index: 1000;
+
+            z-index: 1001;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -52,6 +120,8 @@
             background-color: #F7F3EA;
 
             cursor: pointer;
+
+            pointer-events: auto;
 
             transition:
                 background-color 0.2s ease,
@@ -109,7 +179,9 @@
 
         #startside {
             padding: 20px;
+
             margin-top: 35px;
+
             background-color: transparent;
         }
 
@@ -120,11 +192,17 @@
 
         .listeboks {
             border: 1px solid #52706B;
+
             border-radius: 16px;
+
             padding: 24px;
+
             margin-top: 20px;
+
             background-color: #F7F3EA;
-            box-shadow: 0 4px 15px rgba(53, 79, 82, 0.15);
+
+            box-shadow:
+                0 4px 15px rgba(53, 79, 82, 0.15);
 
             transition:
                 background-color 0.2s ease,
@@ -139,11 +217,15 @@
 
         input {
             padding: 13px;
+
             font-size: 18px;
+
             width: 250px;
+
             margin: 10px;
 
             border: 1px solid #52706B;
+
             border-radius: 8px;
 
             box-sizing: border-box;
@@ -151,6 +233,7 @@
             text-align: center;
 
             color: #354F52;
+
             background-color: #F7F3EA;
 
             transition:
@@ -162,6 +245,7 @@
 
         input::placeholder {
             color: #354F52;
+
             opacity: 0.7;
         }
 
@@ -180,9 +264,11 @@
             margin: 5px;
 
             border: 1px solid #52706B;
+
             border-radius: 8px;
 
             background-color: #E6EDE9;
+
             color: #354F52;
 
             transition:
@@ -200,6 +286,7 @@
 
         button:disabled {
             cursor: not-allowed;
+
             opacity: 0.5;
         }
 
@@ -220,12 +307,14 @@
             border-color: #B8C5C1;
 
             font-size: 19px;
+
             font-weight: bold;
         }
 
 
         #startKnapp:not(:disabled) {
             background-color: #4F8A78;
+
             border-color: #4F8A78;
 
             color: white;
@@ -240,7 +329,9 @@
 
         #toppFem {
             width: 100%;
+
             text-align: center;
+
             color: #354F52;
         }
 
@@ -317,33 +408,6 @@
 
         #quiz {
             margin-top: 90px;
-        }
-
-
-        #spiller {
-            font-weight: bold;
-        }
-
-
-        /* =========================
-           POENGTELLER
-           ========================= */
-
-        #poengVisning {
-            position: fixed;
-
-            top: 20px;
-            left: 20px;
-
-            z-index: 999;
-
-            margin: 0;
-
-            font-size: 20px;
-
-            font-weight: bold;
-
-            color: #354F52;
         }
 
 
@@ -591,6 +655,21 @@
         }
 
 
+        body.dark-mode #spillHeader {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode #poengVisning {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode #spiller {
+            color: #8CBEB2;
+        }
+
+
         body.dark-mode #darkModeToggle {
             background-color: #37474F;
 
@@ -695,22 +774,12 @@
         }
 
 
-        body.dark-mode #poengVisning {
-            color: #8CBEB2;
-        }
-
-
         body.dark-mode #sporsmal {
             color: #8CBEB2;
         }
 
 
         body.dark-mode #sporsmalTeller {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #spiller {
             color: #8CBEB2;
         }
 
@@ -799,6 +868,17 @@
             }
 
 
+            #spillHeader {
+                top: 12px;
+
+                left: 12px;
+
+                right: 12px;
+
+                grid-template-columns: 1fr 2fr 1fr;
+            }
+
+
             #darkModeToggle {
                 top: 12px;
 
@@ -810,6 +890,13 @@
                 top: 18px;
 
                 left: 12px;
+
+                font-size: 18px;
+            }
+
+
+            #spiller {
+                max-width: 150px;
 
                 font-size: 18px;
             }
@@ -909,6 +996,25 @@
 
 
     <!-- =========================
+         HEADER
+         ========================= -->
+
+    <div
+        id="spillHeader"
+        style="display: none;"
+    >
+
+        <p id="poengVisning">
+            ⭐ <span id="poeng">0</span>
+        </p>
+
+
+        <div id="spiller"></div>
+
+    </div>
+
+
+    <!-- =========================
          DARK MODE TOGGLE
          ========================= -->
 
@@ -986,18 +1092,6 @@
         id="quiz"
         style="display: none;"
     >
-
-        <p>
-            Spiller:
-            <strong id="spiller"></strong>
-        </p>
-
-
-        <p id="poengVisning">
-            ⭐ Poeng:
-            <span id="poeng">0</span>
-        </p>
-
 
         <p id="sporsmal"></p>
 
@@ -1350,9 +1444,9 @@
 
 
             document
-                .getElementById("poengVisning")
+                .getElementById("spillHeader")
                 .style.display =
-                    "block";
+                    "grid";
 
 
             visSporsmal();
@@ -1530,6 +1624,16 @@
 
             } else {
 
+                /* SKJUL SPILLHEADER */
+
+                document
+                    .getElementById("spillHeader")
+                    .style.display =
+                        "none";
+
+
+                /* SKJUL QUIZINNHOLD */
+
                 document
                     .getElementById("sporsmal")
                     .style.display =
@@ -1538,12 +1642,6 @@
 
                 document
                     .getElementById("sporsmalTeller")
-                    .style.display =
-                        "none";
-
-
-                document
-                    .getElementById("poengVisning")
                     .style.display =
                         "none";
 
@@ -1561,6 +1659,8 @@
                     .style.display =
                         "none";
 
+
+                /* VIS RESULTAT */
 
                 let sluttresultat =
                     document.getElementById(
@@ -1581,11 +1681,15 @@
                     "block";
 
 
+                /* VIS SPILL IGJEN */
+
                 document
                     .getElementById("spillIgjen")
                     .style.display =
                         "block";
 
+
+                /* LAGRE RESULTAT */
 
                 let { error } =
                     await supabaseClient
@@ -1604,6 +1708,8 @@
                     );
 
                 } else {
+
+                    /* VIS RESULTATLISTE */
 
                     document
                         .getElementById(
