@@ -366,7 +366,7 @@
            TOPP-BRYTER
            ========================= */
 
-        #topplisteBryter {
+        .topplisteBryter {
             display: flex;
 
             justify-content: center;
@@ -486,12 +486,46 @@
         }
 
 
-        #ingenResultater {
+        .ingenResultater {
             font-size: 14px;
 
             opacity: 0.65;
 
             margin: 15px 0;
+        }
+
+
+        /* =========================
+           FULL RESULTATLISTE-LENKE
+           ========================= */
+
+        .fullListeKnapp {
+            display: block;
+
+            margin: 18px auto 0;
+
+            padding: 8px 14px;
+
+            border: none;
+
+            background-color: transparent;
+
+            color: #354F52;
+
+            font-size: 14px;
+
+            opacity: 0.75;
+
+            box-shadow: none;
+        }
+
+
+        .fullListeKnapp:hover {
+            transform: none;
+
+            opacity: 1;
+
+            background-color: transparent;
         }
 
 
@@ -729,66 +763,90 @@
 
 
         /* =========================
-           SPILL IGJEN
+           RESULTATSIDE
            ========================= */
 
-        #spillIgjen {
-            display: block;
+        #resultatside {
+            display: none;
 
-            min-width: 170px;
+            padding-top: 80px;
 
-            margin: 0 auto;
+            padding-bottom: 40px;
 
-            padding: 13px 24px;
+            text-align: center;
+        }
 
-            background-color: #E6EDE9;
+
+        #resultatside h2 {
+            margin: 0 0 25px;
+
+            font-size: 28px;
 
             color: #354F52;
+        }
 
-            font-size: 18px;
 
-            font-weight: bold;
+        #resultatsideTopp {
+            max-width: 430px;
+
+            margin: 0 auto;
+        }
+
+
+        #resultatsideToppliste {
+            min-height: 100px;
+        }
+
+
+        #fullResultatliste {
+            display: none;
+
+            margin-top: 30px;
+        }
+
+
+        #fullResultatliste h3 {
+            margin: 0 0 25px;
+
+            font-size: 22px;
+
+            color: #354F52;
         }
 
 
         /* =========================
-           RESULTATLISTE
+           VIS / SKJUL FULL LISTE
            ========================= */
 
-        #resultatlisteBoks {
-            border: none;
+        #visSkjulListeKnapp {
+            display: block;
 
-            border-radius: 0;
-
-            padding: 0;
-
-            margin-top: 20px;
+            margin: 22px auto 0;
 
             background-color: transparent;
 
-            box-shadow: none;
-        }
-
-
-        #resultatliste {
-            width: 100%;
-
-            text-align: center;
-
             color: #354F52;
+
+            border: none;
+
+            font-size: 15px;
+
+            opacity: 0.75;
         }
 
 
-        #resultatliste h3 {
-            text-align: center;
+        #visSkjulListeKnapp:hover {
+            transform: none;
 
-            margin: 0 0 25px;
+            opacity: 1;
 
-            font-size: 24px;
-
-            color: #354F52;
+            background-color: transparent;
         }
 
+
+        /* =========================
+           RESULTATRADER
+           ========================= */
 
         .resultatrad {
             display: grid;
@@ -845,6 +903,57 @@
         }
 
 
+        /* =========================
+           SPILL IGJEN
+           ========================= */
+
+        #spillIgjen {
+            display: block;
+
+            min-width: 170px;
+
+            margin: 0 auto;
+
+            padding: 13px 24px;
+
+            background-color: #E6EDE9;
+
+            color: #354F52;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           TILBAKE TIL START
+           ========================= */
+
+        #tilbakeKnapp {
+            margin-top: 30px;
+
+            background-color: transparent;
+
+            border: none;
+
+            color: #354F52;
+
+            font-size: 15px;
+
+            opacity: 0.7;
+        }
+
+
+        #tilbakeKnapp:hover {
+            transform: none;
+
+            opacity: 1;
+
+            background-color: transparent;
+        }
+
+
         /* =====================================================
            DARK MODE
            ===================================================== */
@@ -883,17 +992,15 @@
         }
 
 
-        body.dark-mode #toppFem {
+        body.dark-mode #toppFem,
+        body.dark-mode #resultatside,
+        body.dark-mode #resultatside h2,
+        body.dark-mode #resultatside h3 {
             color: #8CBEB2;
         }
 
 
-        body.dark-mode #toppFem h3 {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #topplisteBryter {
+        body.dark-mode .topplisteBryter {
             border-color: #8CBEB2;
         }
 
@@ -917,7 +1024,14 @@
         }
 
 
-        body.dark-mode #ingenResultater {
+        body.dark-mode .ingenResultater {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .fullListeKnapp,
+        body.dark-mode #visSkjulListeKnapp,
+        body.dark-mode #tilbakeKnapp {
             color: #8CBEB2;
         }
 
@@ -1037,8 +1151,6 @@
         }
 
 
-        body.dark-mode #resultatliste,
-        body.dark-mode #resultatliste h3,
         body.dark-mode .resultatrad,
         body.dark-mode .resultatPlassering,
         body.dark-mode .resultatNavn,
@@ -1125,7 +1237,7 @@
             }
 
 
-            #topplisteBryter {
+            .topplisteBryter {
                 margin-bottom: 15px;
             }
 
@@ -1207,8 +1319,16 @@
 
 
             #toppFem h3,
-            #resultatliste h3 {
+            #resultatside h2,
+            #fullResultatliste h3 {
                 font-size: 20px;
+            }
+
+
+            #resultatside {
+                padding-top: 65px;
+
+                padding-bottom: 30px;
             }
 
 
@@ -1318,7 +1438,7 @@
 
 
     <!-- =========================
-         TOPPRESULTATER
+         TOPPRESULTATER FORSIDE
          ========================= -->
 
     <div
@@ -1331,35 +1451,43 @@
             <h3>Toppresultater</h3>
 
 
-            <div id="topplisteBryter">
+            <div class="topplisteBryter">
 
                 <button
-                    id="iDagKnapp"
+                    id="iDagKnappForside"
                     class="periodeKnapp aktiv"
-                    onclick="visToppresultater('iDag')"
+                    onclick="visToppresultater('iDag', 'forside')"
                 >
                     I dag
                 </button>
 
 
                 <button
-                    id="allTimeKnapp"
+                    id="totalKnappForside"
                     class="periodeKnapp"
-                    onclick="visToppresultater('allTime')"
+                    onclick="visToppresultater('total', 'forside')"
                 >
-                    All time
+                    Total
                 </button>
 
             </div>
 
 
-            <div id="topplisteInnhold">
+            <div id="topplisteInnholdForside">
 
-                <p id="ingenResultater">
+                <p class="ingenResultater">
                     Laster resultater...
                 </p>
 
             </div>
+
+
+            <button
+                class="fullListeKnapp"
+                onclick="visResultatside()"
+            >
+                Se full resultatliste →
+            </button>
 
         </div>
 
@@ -1448,14 +1576,128 @@
         </button>
 
 
-        <!-- RESULTATLISTE -->
+        <!-- TOPPRESULTATER PÅ AVSLUTNING -->
 
         <div
-            id="resultatlisteBoks"
+            id="avslutningTopp"
             style="display: none;"
         >
 
-            <div id="resultatliste"></div>
+            <div id="avslutningToppliste">
+
+                <h3>Toppresultater</h3>
+
+
+                <div class="topplisteBryter">
+
+                    <button
+                        id="iDagKnappAvslutning"
+                        class="periodeKnapp aktiv"
+                        onclick="visToppresultater('iDag', 'avslutning')"
+                    >
+                        I dag
+                    </button>
+
+
+                    <button
+                        id="totalKnappAvslutning"
+                        class="periodeKnapp"
+                        onclick="visToppresultater('total', 'avslutning')"
+                    >
+                        Total
+                    </button>
+
+                </div>
+
+
+                <div id="topplisteInnholdAvslutning">
+
+                    <p class="ingenResultater">
+                        Laster resultater...
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="fullListeKnapp"
+                    onclick="visResultatside()"
+                >
+                    Se full resultatliste →
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         RESULTATSIDE
+         ========================= -->
+
+    <div id="resultatside">
+
+        <h2>Resultater</h2>
+
+
+        <div id="resultatsideTopp">
+
+            <div class="topplisteBryter">
+
+                <button
+                    id="iDagKnappResultatside"
+                    class="periodeKnapp aktiv"
+                    onclick="visToppresultater('iDag', 'resultatside')"
+                >
+                    I dag
+                </button>
+
+
+                <button
+                    id="totalKnappResultatside"
+                    class="periodeKnapp"
+                    onclick="visToppresultater('total', 'resultatside')"
+                >
+                    Total
+                </button>
+
+            </div>
+
+
+            <div id="resultatsideToppliste">
+
+                <p class="ingenResultater">
+                    Laster resultater...
+                </p>
+
+            </div>
+
+
+            <button
+                id="visSkjulListeKnapp"
+                onclick="visSkjulFullListe()"
+            >
+                Vis hele resultatlisten ↓
+            </button>
+
+
+            <div id="fullResultatliste">
+
+                <h3>Full resultatliste</h3>
+
+                <div id="fullResultatlisteInnhold"></div>
+
+            </div>
+
+
+            <button
+                id="tilbakeKnapp"
+                onclick="tilbakeTilStart()"
+            >
+                ← Tilbake
+            </button>
 
         </div>
 
@@ -1771,6 +2013,12 @@
 
 
             document
+                .getElementById("resultatside")
+                .style.display =
+                    "none";
+
+
+            document
                 .getElementById("quiz")
                 .style.display =
                     "flex";
@@ -1783,6 +2031,12 @@
 
 
             document
+                .getElementById("avslutningTopp")
+                .style.display =
+                    "none";
+
+
+            document
                 .getElementById("avbrytValg")
                 .style.display =
                     "none";
@@ -1792,6 +2046,18 @@
                 .getElementById("avbrytKnapp")
                 .style.display =
                     "block";
+
+
+            document
+                .getElementById("sluttresultat")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("spillIgjen")
+                .style.display =
+                    "none";
 
 
             visSporsmal();
@@ -2099,19 +2365,19 @@
                     error
                 );
 
-            } else {
-
-                document
-                    .getElementById(
-                        "resultatlisteBoks"
-                    )
-                    .style.display =
-                        "block";
-
-
-                await visResultatliste();
-
             }
+
+
+            document
+                .getElementById("avslutningTopp")
+                .style.display =
+                    "block";
+
+
+            await visToppresultater(
+                "iDag",
+                "avslutning"
+            );
 
         }
 
@@ -2142,202 +2408,119 @@
 
 
         /* =========================
-           RESULTATLISTE
-           ========================= */
-
-        async function visResultatliste() {
-
-            let { data, error } =
-                await supabaseClient
-                    .from("Resultater")
-                    .select(
-                        "navn, poeng, created_at"
-                    )
-                    .order(
-                        "poeng",
-                        {
-                            ascending: false
-                        }
-                    );
-
-
-            let resultatliste =
-                document.getElementById(
-                    "resultatliste"
-                );
-
-
-            resultatliste.innerHTML =
-                "<h3>🏆 Resultatliste</h3>";
-
-
-            if (error) {
-
-                resultatliste.innerHTML +=
-                    "<p>Kunne ikke hente resultatlisten.</p>";
-
-
-                console.error(
-                    "Feil ved henting av resultater:",
-                    error
-                );
-
-
-                return;
-
-            }
-
-
-            data.forEach(
-                function(resultat, index) {
-
-                    let rad =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    rad.className =
-                        "resultatrad";
-
-
-                    let plassering =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    plassering.className =
-                        "resultatPlassering";
-
-
-                    plassering.textContent =
-                        (index + 1) + ".";
-
-
-                    let navnElement =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    navnElement.className =
-                        "resultatNavn";
-
-
-                    navnElement.textContent =
-                        resultat.navn;
-
-
-                    let poengElement =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    poengElement.className =
-                        "resultatPoeng";
-
-
-                    let dato =
-                        new Date(
-                            resultat.created_at
-                        );
-
-
-                    let datoFormatert =
-                        dato.toLocaleDateString(
-                            "no-NO"
-                        );
-
-
-                    poengElement.textContent =
-                        resultat.poeng +
-                        "p, " +
-                        datoFormatert;
-
-
-                    rad.appendChild(
-                        plassering
-                    );
-
-
-                    rad.appendChild(
-                        navnElement
-                    );
-
-
-                    rad.appendChild(
-                        poengElement
-                    );
-
-
-                    resultatliste
-                        .appendChild(rad);
-
-                }
-            );
-
-        }
-
-
-        /* =========================
            TOPPRESULTATER
            ========================= */
 
         async function visToppresultater(
-            periode
+            periode,
+            plassering
         ) {
 
-            let toppFem =
-                document.getElementById(
-                    "topplisteInnhold"
-                );
+            let innhold;
 
 
-            let iDagKnapp =
-                document.getElementById(
-                    "iDagKnapp"
-                );
+            if (
+                plassering ===
+                "forside"
+            ) {
 
+                innhold =
+                    document.getElementById(
+                        "topplisteInnholdForside"
+                    );
 
-            let allTimeKnapp =
-                document.getElementById(
-                    "allTimeKnapp"
-                );
+            } else if (
+                plassering ===
+                "avslutning"
+            ) {
+
+                innhold =
+                    document.getElementById(
+                        "topplisteInnholdAvslutning"
+                    );
+
+            } else {
+
+                innhold =
+                    document.getElementById(
+                        "resultatsideToppliste"
+                    );
+
+            }
 
 
             /* OPPDATER AKTIV KNAPP */
 
-            iDagKnapp.classList.remove(
-                "aktiv"
-            );
+            let iDagKnapp =
+                document.getElementById(
+                    "iDagKnapp" +
+                    storForbokstav(plassering)
+                );
 
 
-            allTimeKnapp.classList.remove(
-                "aktiv"
-            );
+            let totalKnapp =
+                document.getElementById(
+                    "totalKnapp" +
+                    storForbokstav(plassering)
+                );
 
 
-            if (periode === "iDag") {
+            if (
+                iDagKnapp
+            ) {
 
-                iDagKnapp.classList.add(
+                iDagKnapp.classList.remove(
                     "aktiv"
                 );
+
+            }
+
+
+            if (
+                totalKnapp
+            ) {
+
+                totalKnapp.classList.remove(
+                    "aktiv"
+                );
+
+            }
+
+
+            if (
+                periode ===
+                "iDag"
+            ) {
+
+                if (
+                    iDagKnapp
+                ) {
+
+                    iDagKnapp.classList.add(
+                        "aktiv"
+                    );
+
+                }
 
             } else {
 
-                allTimeKnapp.classList.add(
-                    "aktiv"
-                );
+                if (
+                    totalKnapp
+                ) {
+
+                    totalKnapp.classList.add(
+                        "aktiv"
+                    );
+
+                }
 
             }
 
 
             /* VIS LASTING */
 
-            toppFem.innerHTML =
-                "<p id='ingenResultater'>Laster resultater...</p>";
+            innhold.innerHTML =
+                "<p class='ingenResultater'>Laster resultater...</p>";
 
 
             let data;
@@ -2346,11 +2529,12 @@
 
 
             /* =========================
-               ALL TIME
+               TOTAL
                ========================= */
 
             if (
-                periode === "allTime"
+                periode ===
+                "total"
             ) {
 
                 let resultat =
@@ -2451,10 +2635,12 @@
                FEIL
                ========================= */
 
-            if (error) {
+            if (
+                error
+            ) {
 
-                toppFem.innerHTML =
-                    "<p id='ingenResultater'>Kunne ikke hente resultater.</p>";
+                innhold.innerHTML =
+                    "<p class='ingenResultater'>Kunne ikke hente resultater.</p>";
 
 
                 console.error(
@@ -2477,10 +2663,11 @@
                 data.length === 0
             ) {
 
-                toppFem.innerHTML =
-                    "<p id='ingenResultater'>" +
+                innhold.innerHTML =
+                    "<p class='ingenResultater'>" +
                     (
-                        periode === "iDag"
+                        periode ===
+                        "iDag"
                             ? "Ingen resultater i dag ennå."
                             : "Ingen resultater ennå."
                     ) +
@@ -2506,6 +2693,10 @@
             /* =========================
                LAG TOPP 3
                ========================= */
+
+            innhold.innerHTML =
+                "";
+
 
             data.forEach(
                 function(resultat, index) {
@@ -2578,7 +2769,7 @@
                     );
 
 
-                    toppFem.appendChild(
+                    innhold.appendChild(
                         rad
                     );
 
@@ -2589,10 +2780,313 @@
 
 
         /* =========================
+           STOR FORBOKSTAV
+           ========================= */
+
+        function storForbokstav(
+            tekst
+        ) {
+
+            return (
+                tekst
+                    .charAt(0)
+                    .toUpperCase() +
+                tekst.slice(1)
+            );
+
+        }
+
+
+        /* =========================
+           RESULTATSIDE
+           ========================= */
+
+        async function visResultatside() {
+
+            document
+                .getElementById("startside")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("toppFemBoks")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("quiz")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("spillHeader")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("resultatside")
+                .style.display =
+                    "block";
+
+
+            document
+                .getElementById("fullResultatliste")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("visSkjulListeKnapp")
+                .textContent =
+                    "Vis hele resultatlisten ↓";
+
+
+            await visToppresultater(
+                "iDag",
+                "resultatside"
+            );
+
+        }
+
+
+        /* =========================
+           VIS / SKJUL FULL LISTE
+           ========================= */
+
+        async function visSkjulFullListe() {
+
+            let liste =
+                document.getElementById(
+                    "fullResultatliste"
+                );
+
+
+            let knapp =
+                document.getElementById(
+                    "visSkjulListeKnapp"
+                );
+
+
+            if (
+                liste.style.display ===
+                "none"
+            ) {
+
+                liste.style.display =
+                    "block";
+
+
+                knapp.textContent =
+                    "Skjul resultatlisten ↑";
+
+
+                await visFullResultatliste();
+
+            } else {
+
+                liste.style.display =
+                    "none";
+
+
+                knapp.textContent =
+                    "Vis hele resultatlisten ↓";
+
+            }
+
+        }
+
+
+        /* =========================
+           FULL RESULTATLISTE
+           ========================= */
+
+        async function visFullResultatliste() {
+
+            let innhold =
+                document.getElementById(
+                    "fullResultatlisteInnhold"
+                );
+
+
+            innhold.innerHTML =
+                "<p class='ingenResultater'>Laster resultater...</p>";
+
+
+            let { data, error } =
+                await supabaseClient
+                    .from("Resultater")
+                    .select(
+                        "navn, poeng, created_at"
+                    )
+                    .order(
+                        "poeng",
+                        {
+                            ascending: false
+                        }
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: true
+                        }
+                    );
+
+
+            if (
+                error
+            ) {
+
+                innhold.innerHTML =
+                    "<p class='ingenResultater'>Kunne ikke hente resultatlisten.</p>";
+
+
+                console.error(
+                    "Feil ved henting av resultatlisten:",
+                    error
+                );
+
+
+                return;
+
+            }
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                innhold.innerHTML =
+                    "<p class='ingenResultater'>Ingen resultater ennå.</p>";
+
+
+                return;
+
+            }
+
+
+            innhold.innerHTML =
+                "";
+
+
+            data.forEach(
+                function(resultat, index) {
+
+                    let rad =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    rad.className =
+                        "resultatrad";
+
+
+                    let plassering =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    plassering.className =
+                        "resultatPlassering";
+
+
+                    plassering.textContent =
+                        (index + 1) +
+                        ".";
+
+
+                    let navnElement =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    navnElement.className =
+                        "resultatNavn";
+
+
+                    navnElement.textContent =
+                        resultat.navn;
+
+
+                    let poengElement =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    poengElement.className =
+                        "resultatPoeng";
+
+
+                    let dato =
+                        new Date(
+                            resultat.created_at
+                        );
+
+
+                    let datoFormatert =
+                        dato.toLocaleDateString(
+                            "no-NO"
+                        );
+
+
+                    poengElement.textContent =
+                        resultat.poeng +
+                        "p, " +
+                        datoFormatert;
+
+
+                    rad.appendChild(
+                        plassering
+                    );
+
+
+                    rad.appendChild(
+                        navnElement
+                    );
+
+
+                    rad.appendChild(
+                        poengElement
+                    );
+
+
+                    innhold.appendChild(
+                        rad
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           TILBAKE TIL START
+           ========================= */
+
+        function tilbakeTilStart() {
+
+            location.reload();
+
+        }
+
+
+        /* =========================
            START MED "I DAG"
            ========================= */
 
-        visToppresultater("iDag");
+        visToppresultater(
+            "iDag",
+            "forside"
+        );
 
     </script>
 
