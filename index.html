@@ -174,40 +174,30 @@
 
 
         /* =========================
-           STARTDEL
+           FORSIDE
            ========================= */
 
         #startside {
-            padding: 20px;
+            display: flex;
 
-            margin-top: 35px;
+            flex-direction: column;
 
-            background-color: transparent;
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px 20px 10px;
+
+            margin-top: 70px;
         }
 
 
-        /* =========================
-           TOPP 5-BOKS
-           ========================= */
+        #startside p {
+            margin: 0 0 18px;
 
-        .listeboks {
-            border: 1px solid #52706B;
+            font-size: 20px;
 
-            border-radius: 16px;
-
-            padding: 24px;
-
-            margin-top: 20px;
-
-            background-color: #F7F3EA;
-
-            box-shadow:
-                0 4px 15px rgba(53, 79, 82, 0.15);
-
-            transition:
-                background-color 0.2s ease,
-                border-color 0.2s ease,
-                box-shadow 0.2s ease;
+            font-weight: bold;
         }
 
 
@@ -216,13 +206,15 @@
            ========================= */
 
         input {
-            padding: 13px;
+            padding: 14px;
 
             font-size: 18px;
 
-            width: 250px;
+            width: 280px;
 
-            margin: 10px;
+            max-width: 90%;
+
+            margin: 5px 0 12px;
 
             border: 1px solid #52706B;
 
@@ -296,9 +288,11 @@
            ========================= */
 
         #startKnapp {
-            min-width: 150px;
+            min-width: 180px;
 
-            padding: 14px 28px;
+            padding: 15px 32px;
+
+            margin-top: 2px;
 
             background-color: #B8C5C1;
 
@@ -306,7 +300,7 @@
 
             border-color: #B8C5C1;
 
-            font-size: 19px;
+            font-size: 20px;
 
             font-weight: bold;
         }
@@ -327,6 +321,23 @@
            TOPP 5
            ========================= */
 
+        #toppFemBoks {
+            border: none;
+
+            border-radius: 0;
+
+            padding: 10px 0;
+
+            margin: 45px auto 0;
+
+            background-color: transparent;
+
+            box-shadow: none;
+
+            max-width: 430px;
+        }
+
+
         #toppFem {
             width: 100%;
 
@@ -339,26 +350,30 @@
         #toppFem h3 {
             text-align: center;
 
-            margin: 0 0 25px 0;
+            margin: 0 0 18px;
 
-            font-size: 24px;
+            font-size: 18px;
+
+            font-weight: normal;
 
             color: #354F52;
+
+            opacity: 0.75;
         }
 
 
         .toppRad {
             display: grid;
 
-            grid-template-columns: 40px 220px 90px;
+            grid-template-columns: 30px 180px 70px;
 
             align-items: center;
 
-            width: 350px;
+            width: 280px;
 
-            margin: 0 auto 14px auto;
+            margin: 0 auto 8px;
 
-            padding: 10px 0;
+            padding: 5px 0;
         }
 
 
@@ -370,20 +385,22 @@
         .toppNummer {
             text-align: left;
 
-            font-size: 20px;
+            font-size: 15px;
 
-            font-weight: bold;
+            font-weight: normal;
+
+            opacity: 0.7;
         }
 
 
         .toppNavn {
-            width: 220px;
+            width: 180px;
 
             text-align: center;
 
-            font-size: 19px;
+            font-size: 15px;
 
-            font-weight: bold;
+            font-weight: normal;
 
             overflow: hidden;
 
@@ -396,9 +413,9 @@
         .toppPoeng {
             text-align: right;
 
-            font-size: 15px;
+            font-size: 13px;
 
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
 
@@ -420,7 +437,7 @@
 
             font-weight: bold;
 
-            margin: 30px 0 12px 0;
+            margin: 30px 0 12px;
 
             color: #354F52;
 
@@ -494,7 +511,7 @@
 
             min-width: 150px;
 
-            margin: 18px auto 0 auto;
+            margin: 18px auto 0;
 
             padding: 14px 28px;
 
@@ -521,7 +538,7 @@
 
             line-height: 1.5;
 
-            margin: 30px 0 20px 0;
+            margin: 30px 0 20px;
 
             color: #354F52;
         }
@@ -559,7 +576,7 @@
 
             border-radius: 0;
 
-            padding: 10px 0 0 0;
+            padding: 10px 0 0;
 
             margin-top: 30px;
 
@@ -581,7 +598,7 @@
         #resultatliste h3 {
             text-align: center;
 
-            margin: 0 0 25px 0;
+            margin: 0 0 25px;
 
             font-size: 24px;
 
@@ -598,7 +615,7 @@
 
             width: 350px;
 
-            margin: 0 auto 20px auto;
+            margin: 0 auto 20px;
 
             color: #354F52;
         }
@@ -655,16 +672,7 @@
         }
 
 
-        body.dark-mode #spillHeader {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #poengVisning {
-            color: #8CBEB2;
-        }
-
-
+        body.dark-mode #poengVisning,
         body.dark-mode #spiller {
             color: #8CBEB2;
         }
@@ -691,18 +699,20 @@
         }
 
 
-        body.dark-mode .listeboks {
-            background-color: #37474F;
-
-            border-color: #8CBEB2;
-
-            box-shadow:
-                0 4px 15px rgba(0, 0, 0, 0.35);
+        body.dark-mode #toppFem {
+            color: #8CBEB2;
         }
 
 
-        body.dark-mode #startside {
-            background-color: transparent;
+        body.dark-mode #toppFem h3 {
+            color: #8CBEB2;
+        }
+
+
+        body.dark-mode .toppNummer,
+        body.dark-mode .toppNavn,
+        body.dark-mode .toppPoeng {
+            color: #8CBEB2;
         }
 
 
@@ -717,8 +727,6 @@
 
         body.dark-mode input::placeholder {
             color: #8CBEB2;
-
-            opacity: 0.7;
         }
 
 
@@ -749,36 +757,7 @@
         }
 
 
-        body.dark-mode #toppFem {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #toppFem h3 {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .toppNummer {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .toppNavn {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .toppPoeng {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #sporsmal {
-            color: #8CBEB2;
-        }
-
-
+        body.dark-mode #sporsmal,
         body.dark-mode #sporsmalTeller {
             color: #8CBEB2;
         }
@@ -825,31 +804,11 @@
         }
 
 
-        body.dark-mode #resultatliste {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode #resultatliste h3 {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .resultatrad {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .resultatPlassering {
-            color: #8CBEB2;
-        }
-
-
-        body.dark-mode .resultatNavn {
-            color: #8CBEB2;
-        }
-
-
+        body.dark-mode #resultatliste,
+        body.dark-mode #resultatliste h3,
+        body.dark-mode .resultatrad,
+        body.dark-mode .resultatPlassering,
+        body.dark-mode .resultatNavn,
         body.dark-mode .resultatPoeng {
             color: #8CBEB2;
         }
@@ -887,10 +846,6 @@
 
 
             #poengVisning {
-                top: 18px;
-
-                left: 12px;
-
                 font-size: 18px;
             }
 
@@ -902,31 +857,59 @@
             }
 
 
-            #quiz {
-                margin-top: 85px;
-            }
-
+            /* FORSIDE */
 
             #startside {
-                padding: 15px 5px;
+                padding: 15px 5px 5px;
 
-                margin-top: 35px;
+                margin-top: 75px;
             }
 
 
-            .listeboks {
-                padding: 20px 15px;
+            #startside p {
+                font-size: 19px;
 
-                margin-top: 15px;
+                margin-bottom: 15px;
             }
 
 
             input {
-                width: 80%;
+                width: 280px;
 
-                max-width: 300px;
+                max-width: 90%;
+            }
 
-                text-align: center;
+
+            #startKnapp {
+                min-width: 175px;
+            }
+
+
+            #toppFemBoks {
+                margin-top: 40px;
+
+                padding-top: 5px;
+            }
+
+
+            .toppRad {
+                grid-template-columns: 30px 1fr 70px;
+
+                width: 100%;
+
+                max-width: 280px;
+            }
+
+
+            .toppNavn {
+                width: 100%;
+            }
+
+
+            /* QUIZ */
+
+            #quiz {
+                margin-top: 85px;
             }
 
 
@@ -942,17 +925,16 @@
             #sporsmal {
                 font-size: 24px;
 
-                margin: 25px 0 10px 0;
+                margin: 25px 0 10px;
             }
 
 
             #toppFem h3,
             #resultatliste h3 {
-                font-size: 22px;
+                font-size: 20px;
             }
 
 
-            .toppRad,
             .resultatrad {
                 grid-template-columns: 35px 1fr 75px;
 
@@ -962,19 +944,8 @@
             }
 
 
-            .toppNavn,
             .resultatNavn {
                 width: 100%;
-            }
-
-
-            .toppNavn {
-                font-size: 18px;
-            }
-
-
-            .toppPoeng {
-                font-size: 14px;
             }
 
 
@@ -996,7 +967,7 @@
 
 
     <!-- =========================
-         HEADER
+         HEADER UNDER SPILLET
          ========================= -->
 
     <div
@@ -1015,7 +986,7 @@
 
 
     <!-- =========================
-         DARK MODE TOGGLE
+         DARK MODE
          ========================= -->
 
     <button
@@ -1038,7 +1009,7 @@
     <div id="startside">
 
         <p>
-            Skriv inn navnet ditt, og klikk start.
+            Klar for å spille?
         </p>
 
 
@@ -1051,15 +1022,12 @@
         >
 
 
-        <br>
-
-
         <button
             id="startKnapp"
             onclick="startKonkurranse()"
             disabled
         >
-            Start
+            START
         </button>
 
     </div>
@@ -1069,7 +1037,10 @@
          TOPP 5
          ========================= -->
 
-    <div id="toppFemBoks" class="listeboks">
+    <div
+        id="toppFemBoks"
+        class="listeboks"
+    >
 
         <div id="toppFem">
 
@@ -1249,7 +1220,8 @@
         let sporsmal = [
 
             {
-                tekst: "Hva er hovedstaden i Norge?",
+                tekst:
+                    "Hva er hovedstaden i Norge?",
 
                 svar: [
                     "Oslo",
@@ -1257,12 +1229,14 @@
                     "Trondheim"
                 ],
 
-                riktig: "Oslo"
+                riktig:
+                    "Oslo"
             },
 
 
             {
-                tekst: "Hvilken planet er nærmest solen?",
+                tekst:
+                    "Hvilken planet er nærmest solen?",
 
                 svar: [
                     "Jorden",
@@ -1270,12 +1244,14 @@
                     "Mars"
                 ],
 
-                riktig: "Merkur"
+                riktig:
+                    "Merkur"
             },
 
 
             {
-                tekst: "Hvor mange dager er det i en uke?",
+                tekst:
+                    "Hvor mange dager er det i en uke?",
 
                 svar: [
                     "5",
@@ -1283,12 +1259,14 @@
                     "10"
                 ],
 
-                riktig: "7"
+                riktig:
+                    "7"
             },
 
 
             {
-                tekst: "Hvilket dyr er kjent som menneskets beste venn?",
+                tekst:
+                    "Hvilket dyr er kjent som menneskets beste venn?",
 
                 svar: [
                     "Katt",
@@ -1296,12 +1274,14 @@
                     "Hest"
                 ],
 
-                riktig: "Hund"
+                riktig:
+                    "Hund"
             },
 
 
             {
-                tekst: "Hva heter Norges lengste elv?",
+                tekst:
+                    "Hva heter Norges lengste elv?",
 
                 svar: [
                     "Glomma",
@@ -1309,7 +1289,8 @@
                     "Lågen"
                 ],
 
-                riktig: "Glomma"
+                riktig:
+                    "Glomma"
             }
 
         ];
@@ -1325,8 +1306,6 @@
                 navnInput.trim();
 
 
-            /* MAKS 20 TEGN TOTALT */
-
             if (
                 navnUtenStartOgSlutt.length > 20
             ) {
@@ -1335,8 +1314,6 @@
 
             }
 
-
-            /* MAKS 10 TEGN UTEN MELLOMROM */
 
             let deler =
                 navnUtenStartOgSlutt.split(/\s+/);
@@ -1363,7 +1340,7 @@
 
 
         /* =========================
-           STARTKNAPP
+           NAVNEFELT
            ========================= */
 
         document
@@ -1565,7 +1542,8 @@
             knapper.forEach(
                 function(knapp) {
 
-                    knapp.disabled = true;
+                    knapp.disabled =
+                        true;
 
                 }
             );
@@ -1624,15 +1602,11 @@
 
             } else {
 
-                /* SKJUL SPILLHEADER */
-
                 document
                     .getElementById("spillHeader")
                     .style.display =
                         "none";
 
-
-                /* SKJUL QUIZINNHOLD */
 
                 document
                     .getElementById("sporsmal")
@@ -1660,8 +1634,6 @@
                         "none";
 
 
-                /* VIS RESULTAT */
-
                 let sluttresultat =
                     document.getElementById(
                         "sluttresultat"
@@ -1681,15 +1653,11 @@
                     "block";
 
 
-                /* VIS SPILL IGJEN */
-
                 document
                     .getElementById("spillIgjen")
                     .style.display =
                         "block";
 
-
-                /* LAGRE RESULTAT */
 
                 let { error } =
                     await supabaseClient
@@ -1708,8 +1676,6 @@
                     );
 
                 } else {
-
-                    /* VIS RESULTATLISTE */
 
                     document
                         .getElementById(
