@@ -425,6 +425,8 @@
 
         #quiz {
             margin-top: 90px;
+
+            padding-bottom: 80px;
         }
 
 
@@ -522,6 +524,88 @@
             color: white;
 
             font-size: 19px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           AVBRYT-MENY
+           ========================= */
+
+        #avbrytOmrade {
+            position: fixed;
+
+            bottom: 18px;
+
+            left: 0;
+            right: 0;
+
+            z-index: 900;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            pointer-events: none;
+        }
+
+
+        #avbrytKnapp {
+            min-width: 130px;
+
+            padding: 9px 20px;
+
+            margin: 0;
+
+            font-size: 15px;
+
+            background-color: #E6EDE9;
+
+            color: #354F52;
+
+            border-color: #52706B;
+
+            pointer-events: auto;
+        }
+
+
+        #avbrytValg {
+            display: none;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            margin-bottom: 5px;
+
+            pointer-events: auto;
+        }
+
+
+        #leverInnKnapp {
+            min-width: 190px;
+
+            background-color: #4F8A78;
+
+            color: white;
+
+            border-color: #4F8A78;
+
+            font-weight: bold;
+        }
+
+
+        #startPaNyttKnapp {
+            min-width: 190px;
+
+            background-color: #E6EDE9;
+
+            color: #354F52;
+
+            border-color: #52706B;
 
             font-weight: bold;
         }
@@ -790,6 +874,33 @@
         }
 
 
+        body.dark-mode #avbrytKnapp {
+            background-color: #455A64;
+
+            color: #8CBEB2;
+
+            border-color: #8CBEB2;
+        }
+
+
+        body.dark-mode #leverInnKnapp {
+            background-color: #4F8A78;
+
+            color: #F2EBBF;
+
+            border-color: #4F8A78;
+        }
+
+
+        body.dark-mode #startPaNyttKnapp {
+            background-color: #455A64;
+
+            color: #8CBEB2;
+
+            border-color: #8CBEB2;
+        }
+
+
         body.dark-mode #sluttresultat {
             color: #8CBEB2;
         }
@@ -910,6 +1021,8 @@
 
             #quiz {
                 margin-top: 85px;
+
+                padding-bottom: 85px;
             }
 
 
@@ -926,6 +1039,20 @@
                 font-size: 24px;
 
                 margin: 25px 0 10px;
+            }
+
+
+            #avbrytOmrade {
+                bottom: 12px;
+            }
+
+
+            #avbrytKnapp {
+                min-width: 120px;
+
+                padding: 8px 18px;
+
+                font-size: 14px;
             }
 
 
@@ -1073,6 +1200,51 @@
         <div id="svaralternativer"></div>
 
 
+        <!-- NESTE -->
+
+        <button
+            id="neste"
+            onclick="nesteSporsmal()"
+            style="display: none;"
+        >
+            Neste ➡️
+        </button>
+
+
+        <!-- AVBRYT-OMRÅDE -->
+
+        <div id="avbrytOmrade">
+
+            <div id="avbrytValg">
+
+                <button
+                    id="leverInnKnapp"
+                    onclick="leverInnSvar()"
+                >
+                    Lever inn svar
+                </button>
+
+
+                <button
+                    id="startPaNyttKnapp"
+                    onclick="startPaNytt()"
+                >
+                    Start på nytt
+                </button>
+
+            </div>
+
+
+            <button
+                id="avbrytKnapp"
+                onclick="visAvbrytValg()"
+            >
+                Avbryt
+            </button>
+
+        </div>
+
+
         <!-- SLUTTRESULTAT -->
 
         <div
@@ -1102,17 +1274,6 @@
             <div id="resultatliste"></div>
 
         </div>
-
-
-        <!-- NESTE -->
-
-        <button
-            id="neste"
-            onclick="nesteSporsmal()"
-            style="display: none;"
-        >
-            Neste ➡️
-        </button>
 
     </div>
 
@@ -1396,6 +1557,17 @@
                 navnInput;
 
 
+            poeng = 0;
+
+            sporsmalNummer = 0;
+
+
+            document
+                .getElementById("poeng")
+                .textContent =
+                    poeng;
+
+
             document
                 .getElementById("spiller")
                 .textContent =
@@ -1424,6 +1596,18 @@
                 .getElementById("spillHeader")
                 .style.display =
                     "grid";
+
+
+            document
+                .getElementById("avbrytValg")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("avbrytKnapp")
+                .style.display =
+                    "block";
 
 
             visSporsmal();
@@ -1517,6 +1701,20 @@
                 .style.display =
                     "none";
 
+
+            /* LUKK AVBRYT-MENYEN */
+
+            document
+                .getElementById("avbrytValg")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("avbrytKnapp")
+                .style.display =
+                    "block";
+
         }
 
 
@@ -1585,6 +1783,176 @@
 
 
         /* =========================
+           AVBRYT-MENY
+           ========================= */
+
+        function visAvbrytValg() {
+
+            let valg =
+                document.getElementById(
+                    "avbrytValg"
+                );
+
+
+            let avbrytKnapp =
+                document.getElementById(
+                    "avbrytKnapp"
+                );
+
+
+            valg.style.display =
+                "flex";
+
+
+            avbrytKnapp.style.display =
+                "none";
+
+        }
+
+
+        /* =========================
+           START PÅ NYTT
+           ========================= */
+
+        function startPaNytt() {
+
+            location.reload();
+
+        }
+
+
+        /* =========================
+           LEVER INN SVAR
+           ========================= */
+
+        async function leverInnSvar() {
+
+            await avsluttKonkurranse();
+
+        }
+
+
+        /* =========================
+           AVSLUTT KONKURRANSE
+           ========================= */
+
+        async function avsluttKonkurranse() {
+
+            /* SKJUL HEADER */
+
+            document
+                .getElementById("spillHeader")
+                .style.display =
+                    "none";
+
+
+            /* SKJUL SPØRSMÅL */
+
+            document
+                .getElementById("sporsmal")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("sporsmalTeller")
+                .style.display =
+                    "none";
+
+
+            /* FJERN SVARALTERNATIVER */
+
+            document
+                .getElementById(
+                    "svaralternativer"
+                )
+                .innerHTML =
+                    "";
+
+
+            /* SKJUL NESTE */
+
+            document
+                .getElementById("neste")
+                .style.display =
+                    "none";
+
+
+            /* SKJUL AVBRYT-OMRÅDE */
+
+            document
+                .getElementById("avbrytOmrade")
+                .style.display =
+                    "none";
+
+
+            /* VIS RESULTAT */
+
+            let sluttresultat =
+                document.getElementById(
+                    "sluttresultat"
+                );
+
+
+            sluttresultat.textContent =
+                navn +
+                ", du fikk " +
+                poeng +
+                " av " +
+                sporsmal.length +
+                " poeng!";
+
+
+            sluttresultat.style.display =
+                "block";
+
+
+            /* VIS SPILL IGJEN */
+
+            document
+                .getElementById("spillIgjen")
+                .style.display =
+                    "block";
+
+
+            /* LAGRE RESULTAT */
+
+            let { error } =
+                await supabaseClient
+                    .from("Resultater")
+                    .insert({
+                        navn: navn,
+                        poeng: poeng
+                    });
+
+
+            if (error) {
+
+                console.error(
+                    "Feil ved lagring:",
+                    error
+                );
+
+            } else {
+
+                /* VIS RESULTATLISTE */
+
+                document
+                    .getElementById(
+                        "resultatlisteBoks"
+                    )
+                    .style.display =
+                        "block";
+
+
+                await visResultatliste();
+
+            }
+
+        }
+
+
+        /* =========================
            NESTE SPØRSMÅL
            ========================= */
 
@@ -1602,92 +1970,7 @@
 
             } else {
 
-                document
-                    .getElementById("spillHeader")
-                    .style.display =
-                        "none";
-
-
-                document
-                    .getElementById("sporsmal")
-                    .style.display =
-                        "none";
-
-
-                document
-                    .getElementById("sporsmalTeller")
-                    .style.display =
-                        "none";
-
-
-                document
-                    .getElementById(
-                        "svaralternativer"
-                    )
-                    .innerHTML =
-                        "";
-
-
-                document
-                    .getElementById("neste")
-                    .style.display =
-                        "none";
-
-
-                let sluttresultat =
-                    document.getElementById(
-                        "sluttresultat"
-                    );
-
-
-                sluttresultat.textContent =
-                    navn +
-                    ", du fikk " +
-                    poeng +
-                    " av " +
-                    sporsmal.length +
-                    " poeng!";
-
-
-                sluttresultat.style.display =
-                    "block";
-
-
-                document
-                    .getElementById("spillIgjen")
-                    .style.display =
-                        "block";
-
-
-                let { error } =
-                    await supabaseClient
-                        .from("Resultater")
-                        .insert({
-                            navn: navn,
-                            poeng: poeng
-                        });
-
-
-                if (error) {
-
-                    console.error(
-                        "Feil ved lagring:",
-                        error
-                    );
-
-                } else {
-
-                    document
-                        .getElementById(
-                            "resultatlisteBoks"
-                        )
-                        .style.display =
-                            "block";
-
-
-                    await visResultatliste();
-
-                }
+                await avsluttKonkurranse();
 
             }
 
