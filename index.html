@@ -625,16 +625,46 @@
         }
 
 
-        #sporsmalTeller {
-            font-size: 16px;
+        /* =========================
+           PROGRESSBAR
+           ========================= */
 
-            color: #354F52;
+        #progressbar {
+            display: flex;
 
-            opacity: 0.7;
+            justify-content: center;
+            align-items: center;
 
-            margin: 0 0 20px;
+            gap: 10px;
 
-            text-align: center;
+            margin: 0 auto 22px;
+
+            min-height: 16px;
+        }
+
+
+        .progressSirkel {
+            width: 12px;
+            height: 12px;
+
+            border-radius: 50%;
+
+            background-color: transparent;
+
+            border: 2px solid #52706B;
+
+            box-sizing: border-box;
+
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .progressSirkel.aktiv {
+            background-color: #4F8A78;
+
+            border-color: #4F8A78;
         }
 
 
@@ -1128,8 +1158,7 @@
         }
 
 
-        body.dark-mode #sporsmal,
-        body.dark-mode #sporsmalTeller {
+        body.dark-mode #sporsmal {
             color: #8CBEB2;
         }
 
@@ -1207,6 +1236,20 @@
         body.dark-mode .resultatNavn,
         body.dark-mode .resultatPoeng {
             color: #8CBEB2;
+        }
+
+
+        /* PROGRESSBAR DARK MODE */
+
+        body.dark-mode .progressSirkel {
+            border-color: #52706B;
+        }
+
+
+        body.dark-mode .progressSirkel.aktiv {
+            background-color: #8CBEB2;
+
+            border-color: #8CBEB2;
         }
 
 
@@ -1336,6 +1379,20 @@
                 align-items: center;
 
                 justify-content: center;
+            }
+
+
+            #progressbar {
+                gap: 9px;
+
+                margin-bottom: 20px;
+            }
+
+
+            .progressSirkel {
+                width: 11px;
+
+                height: 11px;
             }
 
 
@@ -1553,10 +1610,10 @@
         style="display: none;"
     >
 
+        <div id="progressbar"></div>
+
+
         <p id="sporsmal"></p>
-
-
-        <p id="sporsmalTeller"></p>
 
 
         <div id="svaralternativer"></div>
@@ -1766,17 +1823,23 @@
 
             if (erDarkMode) {
 
-                document.body.classList.add("dark-mode");
+                document.body.classList.add(
+                    "dark-mode"
+                );
 
             } else {
 
-                document.body.classList.remove("dark-mode");
+                document.body.classList.remove(
+                    "dark-mode"
+                );
 
             }
 
 
             let ikon =
-                document.getElementById("toggleIkon");
+                document.getElementById(
+                    "toggleIkon"
+                );
 
 
             ikon.textContent =
@@ -1937,7 +2000,9 @@
            NAVNEVALIDERING
            ========================= */
 
-        function gyldigNavn(navnInput) {
+        function gyldigNavn(
+            navnInput
+        ) {
 
             let navnUtenStartOgSlutt =
                 navnInput.trim();
@@ -1953,14 +2018,18 @@
 
 
             let deler =
-                navnUtenStartOgSlutt.split(/\s+/);
+                navnUtenStartOgSlutt.split(
+                    /\s+/
+                );
 
 
             for (
                 let del of deler
             ) {
 
-                if (del.length > 10) {
+                if (
+                    del.length > 10
+                ) {
 
                     return false;
 
@@ -2175,12 +2244,6 @@
 
 
             document
-                .getElementById("sporsmalTeller")
-                .style.display =
-                    "block";
-
-
-            document
                 .getElementById("avbrytOmrade")
                 .style.display =
                     "flex";
@@ -2207,11 +2270,65 @@
            BLAND SVAR
            ========================= */
 
-        function blandSvar(svar) {
+        function blandSvar(
+            svar
+        ) {
 
             return svar.sort(
                 () => Math.random() - 0.5
             );
+
+        }
+
+
+        /* =========================
+           PROGRESSBAR
+           ========================= */
+
+        function visProgressbar() {
+
+            let progressbar =
+                document.getElementById(
+                    "progressbar"
+                );
+
+
+            progressbar.innerHTML =
+                "";
+
+
+            for (
+                let i = 0;
+                i < sporsmal.length;
+                i++
+            ) {
+
+                let sirkel =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                sirkel.className =
+                    "progressSirkel";
+
+
+                if (
+                    i < sporsmalNummer
+                ) {
+
+                    sirkel.classList.add(
+                        "aktiv"
+                    );
+
+                }
+
+
+                progressbar.appendChild(
+                    sirkel
+                );
+
+            }
 
         }
 
@@ -2223,16 +2340,12 @@
         function visSporsmal() {
 
             let aktueltSporsmal =
-                sporsmal[sporsmalNummer];
+                sporsmal[
+                    sporsmalNummer
+                ];
 
 
-            document
-                .getElementById("sporsmalTeller")
-                .textContent =
-                    "Spørsmål " +
-                    (sporsmalNummer + 1) +
-                    " av " +
-                    sporsmal.length;
+            visProgressbar();
 
 
             document
@@ -2278,7 +2391,9 @@
 
 
                     svaralternativer
-                        .appendChild(knapp);
+                        .appendChild(
+                            knapp
+                        );
 
                 }
             );
@@ -2314,7 +2429,9 @@
         ) {
 
             let aktueltSporsmal =
-                sporsmal[sporsmalNummer];
+                sporsmal[
+                    sporsmalNummer
+                ];
 
 
             let knapper =
@@ -2437,12 +2554,6 @@
 
 
             document
-                .getElementById("sporsmalTeller")
-                .style.display =
-                    "none";
-
-
-            document
                 .getElementById(
                     "svaralternativer"
                 )
@@ -2496,7 +2607,9 @@
                     });
 
 
-            if (error) {
+            if (
+                error
+            ) {
 
                 console.error(
                     "Feil ved lagring:",
@@ -2637,13 +2750,15 @@
 
             let iDagKnapp =
                 document.getElementById(
-                    "iDagKnapp" + suffiks
+                    "iDagKnapp" +
+                    suffiks
                 );
 
 
             let totalKnapp =
                 document.getElementById(
-                    "totalKnapp" + suffiks
+                    "totalKnapp" +
+                    suffiks
                 );
 
 
@@ -2782,11 +2897,16 @@
              */
 
             let toppTre =
-                data.slice(0, 3);
+                data.slice(
+                    0,
+                    3
+                );
 
 
             let resten =
-                data.slice(3);
+                data.slice(
+                    3
+                );
 
 
             innhold.innerHTML =
@@ -2801,7 +2921,10 @@
 
 
             toppTre.forEach(
-                function(resultat, index) {
+                function(
+                    resultat,
+                    index
+                ) {
 
                     let rad =
                         document.createElement(
@@ -2906,7 +3029,10 @@
 
 
             resten.forEach(
-                function(resultat, index) {
+                function(
+                    resultat,
+                    index
+                ) {
 
                     let rad =
                         document.createElement(
@@ -2929,7 +3055,10 @@
 
 
                     plasseringElement.textContent =
-                        (index + 4) +
+                        (
+                            index +
+                            4
+                        ) +
                         ".";
 
 
@@ -3207,7 +3336,10 @@
 
 
             data.forEach(
-                function(resultat, index) {
+                function(
+                    resultat,
+                    index
+                ) {
 
                     let rad =
                         document.createElement(
@@ -3239,7 +3371,10 @@
                     } else {
 
                         plassering.textContent =
-                            (index + 1) +
+                            (
+                                index +
+                                1
+                            ) +
                             ".";
 
                     }
