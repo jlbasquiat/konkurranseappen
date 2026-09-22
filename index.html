@@ -38,17 +38,17 @@
 
             z-index: 1000;
 
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-
-            align-items: center;
+            display: block;
 
             pointer-events: none;
         }
 
 
         #poengVisning {
-            justify-self: start;
+            position: absolute;
+
+            left: 0;
+            top: 0;
 
             margin: 0;
 
@@ -60,27 +60,6 @@
             text-align: left;
 
             pointer-events: none;
-        }
-
-
-        #spiller {
-            justify-self: center;
-
-            width: 100%;
-            max-width: 300px;
-
-            margin: 0;
-
-            font-size: 20px;
-            font-weight: bold;
-            line-height: 1.15;
-
-            color: #354F52;
-
-            text-align: center;
-
-            overflow-wrap: break-word;
-            word-break: normal;
         }
 
 
@@ -580,11 +559,11 @@
            ========================= */
 
         #quiz {
-            min-height: calc(100vh - 90px);
+            min-height: calc(100vh - 40px);
 
-            margin-top: 50px;
+            margin-top: 0;
 
-            padding: 10px 0 80px;
+            padding: 105px 0 95px;
 
             box-sizing: border-box;
 
@@ -594,7 +573,7 @@
 
             align-items: center;
 
-            justify-content: center;
+            justify-content: flex-start;
         }
 
 
@@ -611,7 +590,7 @@
 
             max-width: 650px;
 
-            margin: 0 auto 12px;
+            margin: 5px auto 15px;
 
             padding: 0 15px;
 
@@ -630,6 +609,15 @@
            ========================= */
 
         #progressbar {
+            position: fixed;
+
+            top: 68px;
+
+            left: 0;
+            right: 0;
+
+            z-index: 999;
+
             display: flex;
 
             justify-content: center;
@@ -637,9 +625,11 @@
 
             gap: 10px;
 
-            margin: 0 auto 22px;
+            margin: 0;
 
             min-height: 16px;
+
+            pointer-events: none;
         }
 
 
@@ -688,7 +678,7 @@
 
             gap: 8px;
 
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
 
@@ -730,9 +720,9 @@
 
             min-width: 150px;
 
-            margin: 18px auto 0;
+            margin: 14px auto 0;
 
-            padding: 14px 28px;
+            padding: 12px 28px;
 
             background-color: #4F8A78;
 
@@ -1032,8 +1022,7 @@
         }
 
 
-        body.dark-mode #poengVisning,
-        body.dark-mode #spiller {
+        body.dark-mode #poengVisning {
             color: #8CBEB2;
         }
 
@@ -1271,8 +1260,6 @@
 
                 left: 12px;
                 right: 12px;
-
-                grid-template-columns: 1fr 2fr 1fr;
             }
 
 
@@ -1284,13 +1271,6 @@
 
 
             #poengVisning {
-                font-size: 18px;
-            }
-
-
-            #spiller {
-                max-width: 150px;
-
                 font-size: 18px;
             }
 
@@ -1363,11 +1343,11 @@
             /* QUIZ */
 
             #quiz {
-                min-height: calc(100vh - 85px);
+                min-height: 100vh;
 
-                margin-top: 45px;
+                margin-top: 0;
 
-                padding: 10px 0 85px;
+                padding: 88px 0 85px;
 
                 box-sizing: border-box;
 
@@ -1377,14 +1357,16 @@
 
                 align-items: center;
 
-                justify-content: center;
+                justify-content: flex-start;
             }
 
 
             #progressbar {
+                top: 58px;
+
                 gap: 9px;
 
-                margin-bottom: 20px;
+                margin: 0;
             }
 
 
@@ -1392,15 +1374,6 @@
                 width: 11px;
 
                 height: 11px;
-            }
-
-
-            #svaralternativer button {
-                width: 100%;
-
-                max-width: 320px;
-
-                min-height: 60px;
             }
 
 
@@ -1412,6 +1385,29 @@
                 padding: 0 10px;
 
                 max-width: 500px;
+            }
+
+
+            #svaralternativer {
+                margin-top: 12px;
+
+                gap: 7px;
+            }
+
+
+            #svaralternativer button {
+                width: 100%;
+
+                max-width: 320px;
+
+                min-height: 55px;
+            }
+
+
+            #neste {
+                margin-top: 12px;
+
+                padding: 11px 25px;
             }
 
 
@@ -1485,13 +1481,8 @@
     >
 
         <p id="poengVisning">
-
-            ⭐ <span id="poeng">0</span>
-
+            <span id="poeng">0P</span>
         </p>
-
-
-        <div id="spiller"></div>
 
     </div>
 
@@ -1611,6 +1602,11 @@
         id="quiz"
         style="display: none;"
     >
+
+        <!--
+            Progressbaren ligger øverst på
+            spørsmålssidene og følger skjermen.
+        -->
 
         <div id="progressbar"></div>
 
@@ -2115,13 +2111,7 @@
             document
                 .getElementById("poeng")
                 .textContent =
-                    poeng;
-
-
-            document
-                .getElementById("spiller")
-                .textContent =
-                    navn;
+                    "0P";
 
 
             document
@@ -2151,7 +2141,7 @@
             document
                 .getElementById("spillHeader")
                 .style.display =
-                    "grid";
+                    "block";
 
 
             document
@@ -2208,7 +2198,7 @@
             document
                 .getElementById("poeng")
                 .textContent =
-                    "0";
+                    "0P";
 
 
             document
@@ -2244,7 +2234,7 @@
             document
                 .getElementById("spillHeader")
                 .style.display =
-                    "grid";
+                    "block";
 
 
             document
@@ -2487,7 +2477,7 @@
                 document
                     .getElementById("poeng")
                     .textContent =
-                        poeng;
+                        poeng + "P";
 
 
                 klikketKnapp.classList.add(
@@ -2598,6 +2588,12 @@
 
             document
                 .getElementById("avbrytOmrade")
+                .style.display =
+                    "none";
+
+
+            document
+                .getElementById("progressbar")
                 .style.display =
                     "none";
 
@@ -3331,7 +3327,5 @@
 
     </script>
 
-</body>
-</html>
 </body>
 </html>
