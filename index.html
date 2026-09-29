@@ -1915,8 +1915,6 @@
 
         let sporsmal = [];
 
-        let sporsmalLastet = false;
-
 
         /* =========================
            HENT SPØRSMÅL FRA SUPABASE
@@ -1924,82 +1922,106 @@
 
         async function hentSporsmal() {
 
-            const { data, error } = await supabaseClient
-                .from("questions")
-                .select(`
-                    id,
-                    text,
-                    active,
-                    category_id,
-                    answer_options (
-                        id,
-                        text,
-                        is_correct
-                    )
-                `)
-                .eq("active", true);
+            const { data: sporsmalData, error: sporsmalError } =
+                await supabaseClient
+                    .from("questions")
+                    .select("id, text, category_id")
+                    .eq("active", true);
 
 
-            if (error) {
+            if (sporsmalError) {
 
-                console.error("Feil ved henting av spørsmål:", error);
+                console.error(
+                    "Feil ved henting av spørsmål:",
+                    sporsmalError
+                );
 
-                sporsmalLastet = false;
-
-                document
-                    .getElementById("startKnapp")
-                    .disabled = true;
-
-                return;
+                throw new Error(
+                    "Kunne ikke hente spørsmål fra databasen."
+                );
             }
 
 
-            if (!data || data.length === 0) {
+            if (!sporsmalData || sporsmalData.length === 0) {
 
-                console.error("Fant ingen aktive spørsmål i databasen.");
-
-                sporsmalLastet = false;
-
-                document
-                    .getElementById("startKnapp")
-                    .disabled = true;
-
-                return;
+                throw new Error(
+                    "Ingen aktive spørsmål finnes i databasen."
+                );
             }
 
 
-            sporsmal = data.map(function(sporsmalData) {
+            const questionIds =
+                sporsmalData.map(function(sporsmalRad) {
+                    return sporsmalRad.id;
+                });
+
+
+            const { data: svarData, error: svarError } =
+                await supabaseClient
+                    .from("answer_options")
+                    .select("question_id, text, is_correct")
+                    .in("question_id", questionIds);
+
+
+            if (svarError) {
+
+                console.error(
+                    "Feil ved henting av svar:",
+                    svarError
+                );
+
+                throw new Error(
+                    "Kunne ikke hente svaralternativer fra databasen."
+                );
+            }
+
+
+            sporsmal = sporsmalData.map(function(sporsmalRad) {
+
+                const svarForSporsmal =
+                    (svarData || []).filter(function(svar) {
+                        return String(svar.question_id) ===
+                            String(sporsmalRad.id);
+                    });
+
+
+                const riktigSvar =
+                    svarForSporsmal.find(function(svar) {
+                        return svar.is_correct === true;
+                    });
+
 
                 return {
-                    tekst: sporsmalData.text,
-                    svar: sporsmalData.answer_options.map(function(alternativ) {
-                        return alternativ.text;
+                    tekst: sporsmalRad.text,
+                    svar: svarForSporsmal.map(function(svar) {
+                        return svar.text;
                     }),
-                    riktig: (
-                        sporsmalData.answer_options.find(function(alternativ) {
-                            return alternativ.is_correct === true;
-                        }) || {}
-                    ).text
+                    riktig: riktigSvar ? riktigSvar.text : null
                 };
 
             });
 
 
-            sporsmalLastet = true;
+            sporsmal = sporsmal.filter(function(sporsmalRad) {
+                return (
+                    sporsmalRad.svar.length > 0 &&
+                    sporsmalRad.riktig !== null
+                );
+            });
 
 
-            let navnInput =
-                document.getElementById("navn");
+            if (sporsmal.length === 0) {
 
-            let startKnapp =
-                document.getElementById("startKnapp");
-
-
-            startKnapp.disabled =
-                !gyldigNavn(navnInput.value) || !sporsmalLastet;
+                throw new Error(
+                    "Fant ingen komplette spørsmål med svar."
+                );
+            }
 
 
-            console.log("Spørsmål hentet fra Supabase:", sporsmal);
+            console.log(
+                "Spørsmål hentet fra Supabase:",
+                sporsmal
+            );
 
         }
 
@@ -2078,7 +2100,7 @@
                     startKnapp.disabled =
                         !gyldigNavn(
                             navnInput.value
-                        ) || !sporsmalLastet;
+                        );
 
                 }
             );
@@ -2088,7 +2110,7 @@
            START KONKURRANSE
            ========================= */
 
-        function startKonkurranse() {
+        async function startKonkurranse() {
 
             let navnInput =
                 document
@@ -2106,11 +2128,36 @@
             }
 
 
-            if (!sporsmalLastet || sporsmal.length === 0) {
+            let startKnapp =
+                document.getElementById("startKnapp");
+
+
+            startKnapp.disabled = true;
+            startKnapp.textContent = "LASTER...";
+
+
+            try {
+
+                await hentSporsmal();
+
+            } catch (error) {
+
+                console.error("Feil ved start:", error);
+
+                alert(
+                    error.message ||
+                    "Noe gikk galt. Prøv igjen."
+                );
+
+                startKnapp.disabled = false;
+                startKnapp.textContent = "START";
 
                 return;
 
             }
+
+
+            startKnapp.textContent = "START";
 
 
             navn =
@@ -3338,9 +3385,6 @@
         /* =========================
            START MED I DAG
            ========================= */
-
-        hentSporsmal();
-
 
         visToppresultater(
             "iDag",
